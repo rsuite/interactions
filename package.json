@@ -1,0 +1,100 @@
+{
+  "name": "@rsuite/interactions",
+  "version": "1.0.0",
+  "description": "Call rsuite Modal at ease.",
+  "main": "lib",
+  "types": "index.d.ts",
+  "scripts": {
+    "dev": "NODE_ENV=development webpack-dev-server  --inline --progress --colors --port 3100 --host 0.0.0.0 ",
+    "build": "rm -rf lib && babel src --out-dir lib ",
+    "docs": "rm -rf assets &&  NODE_ENV=production webpack",
+    "publish-docs": "node docs/gh-pages.js",
+    "lint": "eslint src  *.js",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rsuite/interactions.git"
+  },
+  "files": [
+    "lib",
+    "src",
+    "*.d.ts"
+  ],
+  "keywords": [
+    "react",
+    "rsuite",
+    "react-components",
+    "modal",
+    "interaction",
+    "alert",
+    "confirm",
+    "prompt"
+  ],
+  "author": "Doma<leishenghao@126.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rsuite/interactions/issues"
+  },
+  "homepage": "https://github.com/rsuite/interactions#readme",
+  "peerDependencies": {
+    "rsuite": "^3.7.5 || >=4.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.2",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/polyfill": "^7.6.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.0",
+    "css-loader": "^2.1.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-babel": "^4.1.1",
+    "eslint-plugin-flowtype": "^2.41.0",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.10.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^2.29.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.0.5",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-hot-loader": "^3.1.3",
+    "rsuite": "^4.0.2",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie >= 10"
+  ],
+  "publishConfig": {
+    "access": "pubilc"
+  }
+}
