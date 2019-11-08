@@ -1,6 +1,6 @@
 # RSuite Interactions
 
-> Call RSuite Modal at ease.
+> Call RSuite Modals like a boss.
 
     npm install @rsuite/interactions --save
 
