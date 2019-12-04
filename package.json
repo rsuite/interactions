@@ -61,6 +61,7 @@
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
@@ -93,5 +94,8 @@
     "> 1%",
     "last 2 versions",
     "ie >= 10"
-  ]
+  ],
+  "dependencies": {
+    "@babel/runtime": "^7.7.4"
+  }
 }
