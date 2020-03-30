@@ -1,5 +1,7 @@
-export function alert(message?: string): void;
+import * as React from 'react';
 
-export function confirm(message?: string): Promise<boolean>;
+export function alert(message?: React.ReactNode): void;
 
-export function prompt(message?: string, _default?: string): Promise<string | null>;
+export function confirm(message?: React.ReactNode): Promise<boolean>;
+
+export function prompt(message?: React.ReactNode, _default?: string): Promise<string | null>;
