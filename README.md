@@ -48,15 +48,15 @@ function App() {
 
 ## API
 
-### `alert(message?: string): void`
+### `alert(message?: React.ReactNode, config?: AlertModalProps): void`
 
 Use it like you are using `window.alert()`.
 
-### `confirm(message?: string): Promise<boolean>`
+### `confirm(message?: React.ReactNode, config?: ConfirmModalProps): Promise<boolean>`
 
 Use it like you are using `window.confirm()` but await its return value.
 
-### `prompt(message?: string, _default?: string): Promise<string | null>`
+### `prompt(message?: React.ReactNode, _default?: string, config?: PromoteModalProps): Promise<string | null>`
 
 Use it like you are using `window.prompt()` but await its return value.
 
