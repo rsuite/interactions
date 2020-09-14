@@ -25,7 +25,7 @@ function PromptModal({ message, defaultResult = '', onOk, ...props }) {
   );
 }
 
-export default function prompt(message, _default) {
+export default function prompt(message, _default, modalConfig) {
   return new Promise(resolve => {
     ReactDOM.render(
       <PromptModal
@@ -34,6 +34,7 @@ export default function prompt(message, _default) {
         defaultResult={_default}
         onOk={resolve}
         onCancel={() => resolve(null)}
+        {...modalConfig}
       />,
       getContainerDOM()
     );

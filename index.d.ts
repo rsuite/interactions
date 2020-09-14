@@ -1,7 +1,37 @@
 import * as React from 'react';
 
-export function alert(message?: React.ReactNode): void;
+/**
+ * okButtonText?: string;
+  cancelButtonText?: string;
+  showCancelButton?: boolean;
+ */
 
-export function confirm(message?: React.ReactNode): Promise<boolean>;
+interface AlertModalProps {
+  okButtonText?: string;
+}
 
-export function prompt(message?: React.ReactNode, _default?: string): Promise<string | null>;
+interface ConfirmModalProps {
+  okButtonText?: string;
+  cancelButtonText?: string;
+}
+
+interface PromoteModalProps {
+  okButtonText?: string;
+  cancelButtonText?: string;
+}
+
+export function alert(
+  message?: React.ReactNode,
+  modalConfig?: AlertModalProps
+): void;
+
+export function confirm(
+  message?: React.ReactNode,
+  modalConfig?: ConfirmModalProps
+): Promise<boolean>;
+
+export function prompt(
+  message?: React.ReactNode,
+  _default?: string,
+  modalConfig?: PromoteModalProps
+): Promise<string | null>;
