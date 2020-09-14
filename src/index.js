@@ -1,4 +1,4 @@
-import manager from './InteractionManager';
+import manager from './Interactionmanager';
 
 export const alert = (message, modalConfig) => manager.requestInteraction('alert', message, modalConfig);
 export const confirm = (message, modalConfig) => manager.requestInteraction('confirm', message, modalConfig);
