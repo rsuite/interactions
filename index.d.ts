@@ -1,11 +1,5 @@
 import * as React from 'react';
 
-/**
- * okButtonText?: string;
-  cancelButtonText?: string;
-  showCancelButton?: boolean;
- */
-
 interface AlertModalProps {
   okButtonText?: string;
 }
