@@ -1,11 +1,5 @@
 import * as React from 'react';
 
-/**
- * okButtonText?: string;
-  cancelButtonText?: string;
-  showCancelButton?: boolean;
- */
-
 interface AlertModalProps {
   okButtonText?: string;
 }
@@ -15,7 +9,7 @@ interface ConfirmModalProps {
   cancelButtonText?: string;
 }
 
-interface PromoteModalProps {
+interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
 }
@@ -33,5 +27,5 @@ export function confirm(
 export function prompt(
   message?: React.ReactNode,
   _default?: string,
-  modalConfig?: PromoteModalProps
+  modalConfig?: PromptModalProps
 ): Promise<string | null>;
