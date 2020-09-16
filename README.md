@@ -81,7 +81,7 @@ const promptForName = useCallback(async () => {
 #### Signatures
 
 ```tsx
-interface PromoteModalProps {
+interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
 }
@@ -89,7 +89,7 @@ interface PromoteModalProps {
 prompt(
   message?: React.ReactNode,
   _default?: string,
-  modalConfig?: PromoteModalProps
+  modalConfig?: PromptModalProps
 ): Promise<string | null>;
 ```
 
