@@ -47,6 +47,7 @@ module.exports = {
     'arrow-parens': [ERROR, 'as-needed'],
     'no-mixed-operators': OFF,
     'no-continue': OFF,
+    'import/newline-after-import': OFF,
     /**
      * https://github.com/airbnb/javascript/tree/master/react
      */
@@ -68,6 +69,7 @@ module.exports = {
     'react/prefer-stateless-function': OFF,
     'react/require-default-props': OFF,
     'react/no-find-dom-node': OFF,
+    'react/prop-types': OFF,
 
     /**
      * Flowtype

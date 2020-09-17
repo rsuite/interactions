@@ -6,30 +6,32 @@ import prompt from './prompt';
  * 用于队列 interaction 请求
  */
 class InteractionManager {
+  $tail = null;
 
-   $tail = null;
-
-   $interactionMap = {
+  $interactionMap = {
     alert,
     confirm,
-    prompt
+    prompt,
   };
 
-   getInteractionMethod(method) {
+  getInteractionMethod(method) {
     return this.$interactionMap[method];
   }
 
-   interactionMethodExists(method) {
+  interactionMethodExists(method) {
     return !!this.$interactionMap[method];
   }
 
   requestInteraction(method, ...args) {
-    if (!this.interactionMethodExists(method)) return Promise.reject(new Error(`No such interaction '${method}' found.`));
-
+    if (!this.interactionMethodExists(method)) {
+      return Promise.reject(
+        new Error(`No such interaction '${method}' found.`)
+      );
+    }
     return this.performInteraction(method, ...args);
   }
 
-   performInteraction(method, ...args) {
+  performInteraction(method, ...args) {
     const tail = this.$tail;
 
     this.$tail = new Promise(async resolve => {

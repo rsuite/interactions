@@ -7,33 +7,29 @@ function InteractionModal({
   showCancelButton = true,
   cancelButtonText = '取消',
   onCancel,
-  children
+  children,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
 
   const handleOk = useCallback(() => {
-      setShouldShowModal(false);
-      onOk && onOk();
+    setShouldShowModal(false);
+    onOk && onOk();
   }, [onOk]);
-  
+
   const handleCancel = useCallback(() => {
-      setShouldShowModal(false);
-      onCancel && onCancel();
+    setShouldShowModal(false);
+    onCancel && onCancel();
   }, [onCancel]);
 
   return (
     <Modal size="xs" show={shouldShowModal}>
-      <Modal.Body>
-          {children}
-      </Modal.Body>
+      <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         <Button onClick={handleOk} appearance="primary">
           {okButtonText}
         </Button>
         {showCancelButton && (
-          <Button onClick={handleCancel}>
-            {cancelButtonText}
-          </Button>
+          <Button onClick={handleCancel}>{cancelButtonText}</Button>
         )}
       </Modal.Footer>
     </Modal>
