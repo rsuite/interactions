@@ -17,7 +17,7 @@ interface PromptModalProps {
 export function alert(
   message?: React.ReactNode,
   modalConfig?: AlertModalProps
-): void;
+): Promise<void>;
 
 export function confirm(
   message?: React.ReactNode,

@@ -18,11 +18,12 @@
 
 ### `alert`
 
-Use it like you are using `window.alert()`.
+Use it like you are using `window.alert()`, and you can await it.
 
 ```tsx
-const buyNewPhone = useCallback(() => {
-  alert("Congrats! You've got a new iPhone!");
+const buyNewPhone = useCallback(async () => {
+  await alert("Congrats! You've got a new iPhone!");
+  console.log('alert closed');
 }, []);
 ```
 
@@ -36,7 +37,7 @@ interface AlertModalProps {
 alert(
   message?: React.ReactNode,
   modalConfig?: AlertModalProps
-): void;
+): Promise<void>;
 ```
 
 ### `confirm`
