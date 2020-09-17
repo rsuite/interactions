@@ -12,7 +12,6 @@ const extractLess = new ExtractTextPlugin({
 const docsPath = NODE_ENV === 'development' ? './assets' : './';
 const plugins = [
   new webpack.HotModuleReplacementPlugin(),
-  new webpack.NamedModulesPlugin(),
   new webpack.DefinePlugin({
     NODE_ENV: JSON.stringify(NODE_ENV)
   }),
