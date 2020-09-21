@@ -11,6 +11,7 @@ export default function alert(message, modalConfig) {
         onOk={resolve}
         showCancelButton={false}
         resolveFn={resolve}
+        okResolveValue={undefined}
         {...modalConfig}
       >
         {message}

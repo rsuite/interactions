@@ -11,6 +11,7 @@ export default function confirm(message, modalConfig) {
         onOk={() => resolve(true)}
         onCancel={() => resolve(false)}
         resolveFn={resolve}
+        okResolveValue={true}
         {...modalConfig}
       >
         {message}

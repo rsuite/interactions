@@ -11,7 +11,7 @@ function InteractionModal({
   // pass the resolve fn outside here
   resolveFn,
   // custom resolve value on onOk
-  okResolveValue = true,
+  okResolveValue,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
