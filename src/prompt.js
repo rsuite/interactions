@@ -8,12 +8,14 @@ function PromptModal({ message, defaultResult = '', onOk, ...props }) {
 
   const [result, setResult] = useState(defaultResult);
 
-  const handleOk = useCallback(() => {
-    onOk(result);
-  }, [onOk, result]);
+  const handleOk = useCallback(() => onOk(result), [onOk, result]);
 
   return (
-    <InteractionModal {...props} onOk={handleOk}>
+    <InteractionModal
+      {...props}
+      onOk={handleOk}
+      okResolveValue={result}
+    >
       {message}
       <Input
         autoFocus
@@ -34,6 +36,7 @@ export default function prompt(message, _default, modalConfig) {
         defaultResult={_default}
         onOk={resolve}
         onCancel={() => resolve(null)}
+        resolveFn={resolve}
         {...modalConfig}
       />,
       getContainerDOM()

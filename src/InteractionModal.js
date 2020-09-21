@@ -8,13 +8,34 @@ function InteractionModal({
   cancelButtonText = '取消',
   onCancel,
   children,
+  // pass the resolve fn outside here
+  resolveFn,
+  // custom resolve value on onOk
+  okResolveValue = true,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const handleReturnValueOfOnOk = useCallback(returnValueOfOnOk => {
+    if (!returnValueOfOnOk || !returnValueOfOnOk.then) {
+      setShouldShowModal(false);
+      resolveFn && resolveFn(okResolveValue);
+      return;
+    }
+
+    setSubmitLoading(true);
+    returnValueOfOnOk
+      .finally(() => {
+        setSubmitLoading(false);
+        setShouldShowModal(false);
+        resolveFn && resolveFn(okResolveValue);
+      });
+  }, [okResolveValue, resolveFn]);
 
   const handleOk = useCallback(() => {
-    setShouldShowModal(false);
-    onOk && onOk();
-  }, [onOk]);
+    const returnValueOfOnOk = onOk && onOk();
+    handleReturnValueOfOnOk(returnValueOfOnOk);
+  }, [onOk, handleReturnValueOfOnOk]);
 
   const handleCancel = useCallback(() => {
     setShouldShowModal(false);
@@ -25,7 +46,7 @@ function InteractionModal({
     <Modal size="xs" show={shouldShowModal}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleOk} appearance="primary">
+        <Button loading={submitLoading} onClick={handleOk} appearance="primary">
           {okButtonText}
         </Button>
         {showCancelButton && (

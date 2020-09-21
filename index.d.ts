@@ -2,16 +2,19 @@ import * as React from 'react';
 
 interface AlertModalProps {
   okButtonText?: string;
+  onOk?: () => void | (() => Promise<any>);
 }
 
 interface ConfirmModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  onOk?: () => void | (() => Promise<any>);
 }
 
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  onOk?: (inputVal?: string) => void | ((inputVal: string) => Promise<any>);
 }
 
 export function alert(

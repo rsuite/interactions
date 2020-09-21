@@ -32,6 +32,7 @@ const buyNewPhone = useCallback(async () => {
 ```tsx
 interface AlertModalProps {
   okButtonText?: string;
+  onOk?: () => void | (() => Promise<any>);
 }
 
 alert(
@@ -58,6 +59,7 @@ const confirmSmashPhone = useCallback(async () => {
 interface ConfirmModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  onOk?: () => void | (() => Promise<any>);
 }
 
 confirm(
@@ -85,6 +87,7 @@ const promptForName = useCallback(async () => {
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  onOk?: (inputVal?: string) => void | ((inputVal: string) => Promise<any>);
 }
 
 prompt(

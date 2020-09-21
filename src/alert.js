@@ -10,6 +10,7 @@ export default function alert(message, modalConfig) {
         key={Date.now()}
         onOk={resolve}
         showCancelButton={false}
+        resolveFn={resolve}
         {...modalConfig}
       >
         {message}

@@ -10,6 +10,7 @@ export default function confirm(message, modalConfig) {
         key={Date.now()}
         onOk={() => resolve(true)}
         onCancel={() => resolve(false)}
+        resolveFn={resolve}
         {...modalConfig}
       >
         {message}
