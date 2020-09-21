@@ -16,7 +16,7 @@ module.exports = {
     assert: true
   },
   parser: 'babel-eslint',
-  plugins: ['react', 'babel', 'json', 'flowtype'],
+  plugins: ['react', 'babel', 'json', 'flowtype', 'react-hooks'],
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'module',
@@ -70,6 +70,11 @@ module.exports = {
     'react/require-default-props': OFF,
     'react/no-find-dom-node': OFF,
     'react/prop-types': OFF,
+    /**
+     * https://reactjs.org/docs/hooks-rules.html
+     */
+    "react-hooks/rules-of-hooks": ERROR, // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": WARNING, // Checks effect dependencies
 
     /**
      * Flowtype
