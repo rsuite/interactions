@@ -3,18 +3,21 @@ import * as React from 'react';
 interface AlertModalProps {
   okButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
+  canCancelOnLoading?: boolean;
 }
 
 interface ConfirmModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
+  canCancelOnLoading?: boolean;
 }
 
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
+  canCancelOnLoading?: boolean;
 }
 
 export function alert(

@@ -8,6 +8,7 @@ function InteractionModal({
   cancelButtonText = '取消',
   onCancel,
   children,
+  canCancelOnLoading = false
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -19,11 +20,10 @@ function InteractionModal({
     }
 
     setSubmitLoading(true);
-    returnValueOfOnOk
-      .finally(() => {
-        setSubmitLoading(false);
-        setShouldShowModal(false);
-      });
+    returnValueOfOnOk.finally(() => {
+      setSubmitLoading(false);
+      setShouldShowModal(false);
+    });
   }, []);
 
   const handleOk = useCallback(() => {
@@ -44,7 +44,12 @@ function InteractionModal({
           {okButtonText}
         </Button>
         {showCancelButton && (
-          <Button onClick={handleCancel}>{cancelButtonText}</Button>
+          <Button
+            disabled={submitLoading && !canCancelOnLoading}
+            onClick={handleCancel}
+          >
+            {cancelButtonText}
+          </Button>
         )}
       </Modal.Footer>
     </Modal>
