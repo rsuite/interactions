@@ -48,6 +48,7 @@ module.exports = {
     'no-mixed-operators': OFF,
     'no-continue': OFF,
     'import/newline-after-import': OFF,
+    'import/prefer-default-export': OFF,
     /**
      * https://github.com/airbnb/javascript/tree/master/react
      */

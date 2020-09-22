@@ -96,7 +96,9 @@ function App() {
       okButtonText: 'This is my name',
       cancelButtonText: 'I don\'t want to tell you',
       onOk: inputVal => {
-        alert(`You've confirmed your name, ${inputVal}`);
+        if (inputVal) {
+          alert(`You've confirmed your name, ${inputVal}`);
+        }
       }
     });
     if (name) {
@@ -108,14 +110,18 @@ function App() {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
       cancelButtonText: 'I don\'t want to tell you',
-      onOk: nameInput =>
-        getNTimeout(2000, false)
-          .then(() => {
-            alert(`Hi, ${nameInput}, Don't say Sorry, say GoodBye`);
-          })
-          .catch(() => {
-            alert(`Hi, ${nameInput}, System Error, pls contact administrator`);
-          })
+      // eslint-disable-next-line consistent-return
+      onOk: nameInput => {
+        if (nameInput) {
+          return getNTimeout(2000, false)
+            .then(() => {
+              alert(`Hi, ${nameInput}, Don't say Sorry, say GoodBye`);
+            })
+            .catch(() => {
+              alert(`Hi, ${nameInput}, System Error, pls contact administrator`);
+            });
+        }
+      }
     });
     if (name) {
       alert(`Thanks for your collaboration, ${name}`);

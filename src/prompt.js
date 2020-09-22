@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Input } from 'rsuite';
 import InteractionModal from './InteractionModal';
 import getContainerDOM from './getContainerDOM';
+import { isFunction } from './utils';
 
 function PromptModal({ message, defaultResult = '', onOk, ...props }) {
 
@@ -14,7 +15,6 @@ function PromptModal({ message, defaultResult = '', onOk, ...props }) {
     <InteractionModal
       {...props}
       onOk={handleOk}
-      okResolveValue={result}
     >
       {message}
       <Input
@@ -34,10 +34,17 @@ export default function prompt(message, _default, modalConfig) {
         key={Date.now()}
         message={message}
         defaultResult={_default}
-        onOk={resolve}
-        onCancel={() => resolve(null)}
-        resolveFn={resolve}
         {...modalConfig}
+        onOk={async (...args) => {
+          let result;
+          if (modalConfig && isFunction(modalConfig.onOk)) {
+            result = await modalConfig.onOk(...args);
+          }
+          resolve(...args);
+
+          return result;
+        }}
+        onCancel={() => resolve(null)}
       />,
       getContainerDOM()
     );

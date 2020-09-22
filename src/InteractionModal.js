@@ -8,10 +8,6 @@ function InteractionModal({
   cancelButtonText = '取消',
   onCancel,
   children,
-  // pass the resolve fn outside here
-  resolveFn,
-  // custom resolve value on onOk
-  okResolveValue,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -19,7 +15,6 @@ function InteractionModal({
   const handleReturnValueOfOnOk = useCallback(returnValueOfOnOk => {
     if (!returnValueOfOnOk || !returnValueOfOnOk.then) {
       setShouldShowModal(false);
-      resolveFn && resolveFn(okResolveValue);
       return;
     }
 
@@ -28,9 +23,8 @@ function InteractionModal({
       .finally(() => {
         setSubmitLoading(false);
         setShouldShowModal(false);
-        resolveFn && resolveFn(okResolveValue);
       });
-  }, [okResolveValue, resolveFn]);
+  }, []);
 
   const handleOk = useCallback(() => {
     const returnValueOfOnOk = onOk && onOk();
