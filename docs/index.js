@@ -74,7 +74,33 @@ function App() {
         onOk: () =>
           getNTimeout().then(() => {
             alert('Rest in pieces.');
-          })
+          }),
+        canCancelOnLoading: true,
+      })
+    ) {
+      alert('Life is Simple! You make choices and you don\'t look back');
+    }
+  }, []);
+
+  const confirmSmashPhoneCancelAsync = useCallback(async () => {
+    if (
+      await confirm('Are you sure you want to do this?', {
+        okButtonText: 'Yes',
+        cancelButtonText: 'No',
+        onOk: () =>
+          getNTimeout().then(() => {
+            alert('Rest in pieces.');
+          }),
+        canCancelOnLoading: true,
+        onCancel: isSubmitLoading => {
+          // will resolve false when click onCancel
+          if (isSubmitLoading) {
+            alert('is submitLoading');
+            // do something to cancel that promise
+          } else {
+            alert('is not submitLoading');
+          }
+        },
       })
     ) {
       alert('Life is Simple! You make choices and you don\'t look back');
@@ -165,6 +191,14 @@ function App() {
           <Button onClick={buyNewPhoneAsync}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneAsync}>Then smash it!</Button>
           <Button onClick={promptForNameAsync}>{'I\'m so sorry.'}</Button>
+        </ButtonToolbar>
+      </div>
+      <hr />
+      <div className="example">
+        {'onOk: Promise Chain; then onCancel'}
+        <br />
+        <ButtonToolbar>
+          <Button onClick={confirmSmashPhoneCancelAsync}>Then smash it!</Button>
         </ButtonToolbar>
       </div>
     </div>

@@ -33,8 +33,9 @@ function InteractionModal({
 
   const handleCancel = useCallback(() => {
     setShouldShowModal(false);
-    onCancel && onCancel();
-  }, [onCancel]);
+    // pass current loading status to onCancel to distinguish different case
+    onCancel && onCancel(submitLoading);
+  }, [onCancel, submitLoading]);
 
   return (
     <Modal size="xs" show={shouldShowModal}>

@@ -19,7 +19,12 @@ export default function confirm(message, modalConfig) {
 
           return result;
         }}
-        onCancel={() => resolve(false)}
+        onCancel={async isSubmitLoading => {
+          if (modalConfig && isFunction(modalConfig.onCancel)) {
+            await modalConfig.onCancel(isSubmitLoading);
+          }
+          resolve(false);
+        }}
       >
         {message}
       </InteractionModal>,

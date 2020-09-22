@@ -44,7 +44,12 @@ export default function prompt(message, _default, modalConfig) {
 
           return result;
         }}
-        onCancel={() => resolve(null)}
+        onCancel={async isSubmitLoading => {
+          if (modalConfig && isFunction(modalConfig.onCancel)) {
+            await modalConfig.onCancel(isSubmitLoading);
+          }
+          resolve(null);
+        }}
       />,
       getContainerDOM()
     );
