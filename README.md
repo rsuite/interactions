@@ -30,16 +30,18 @@ const buyNewPhone = useCallback(async () => {
 #### Signatures
 
 ```tsx
-interface AlertModalProps {
-  okButtonText?: string;
-  onOk?: (() => void) | (() => Promise<any>);
-}
-
 alert(
   message?: React.ReactNode,
   modalConfig?: AlertModalProps
 ): Promise<void>;
+
+interface AlertModalProps {
+  okButtonText?: string;
+  onOk?: (() => void) | (() => Promise<any>);
+}
 ```
+- `okButtonText`: Customize "OK" button text.
+- `onOk`: Callback function when "OK" is clicked. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
 
 ### `confirm`
 
@@ -56,6 +58,11 @@ const confirmSmashPhone = useCallback(async () => {
 #### Signatures
 
 ```tsx
+confirm(
+  message?: React.ReactNode,
+  modalConfig?: ConfirmModalProps
+): Promise<boolean>;
+
 interface ConfirmModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
@@ -63,12 +70,13 @@ interface ConfirmModalProps {
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
 }
-
-confirm(
-  message?: React.ReactNode,
-  modalConfig?: ConfirmModalProps
-): Promise<boolean>;
 ```
+
+- `okButtonText`: Customize "OK" button text.
+- `cancelButtonText`: Customize "Cancel" button text.
+- `onOk`: Callback function when "OK" is clicked. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
+- `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
+- `canCancelOnLoading`: When `onCancel` is set, you can still use this option to force disable "Cancel" button.
 
 ### `prompt`
 
@@ -86,6 +94,12 @@ const promptForName = useCallback(async () => {
 #### Signatures
 
 ```tsx
+prompt(
+  message?: React.ReactNode,
+  _default?: string,
+  modalConfig?: PromptModalProps
+): Promise<string | null>;
+
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
@@ -93,13 +107,13 @@ interface PromptModalProps {
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
 }
-
-prompt(
-  message?: React.ReactNode,
-  _default?: string,
-  modalConfig?: PromptModalProps
-): Promise<string | null>;
 ```
+
+- `okButtonText`: Customize "OK" button text.
+- `cancelButtonText`: Customize "Cancel" button text.
+- `onOk`: Callback function when "OK" is clicked, receiving a string representing the user input. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
+- `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
+- `canCancelOnLoading`: When `onCancel` is set, you can still use this option to force disable "Cancel" button.
 
 ## License
 
