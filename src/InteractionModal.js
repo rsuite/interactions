@@ -8,28 +8,49 @@ function InteractionModal({
   cancelButtonText = '取消',
   onCancel,
   children,
+  canCancelOnLoading = false
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const handleReturnValueOfOnOk = useCallback(returnValueOfOnOk => {
+    if (!returnValueOfOnOk || !returnValueOfOnOk.then) {
+      setShouldShowModal(false);
+      return;
+    }
+
+    setSubmitLoading(true);
+    returnValueOfOnOk.finally(() => {
+      setSubmitLoading(false);
+      setShouldShowModal(false);
+    });
+  }, []);
 
   const handleOk = useCallback(() => {
-    setShouldShowModal(false);
-    onOk && onOk();
-  }, [onOk]);
+    const returnValueOfOnOk = onOk && onOk();
+    handleReturnValueOfOnOk(returnValueOfOnOk);
+  }, [onOk, handleReturnValueOfOnOk]);
 
   const handleCancel = useCallback(() => {
     setShouldShowModal(false);
-    onCancel && onCancel();
-  }, [onCancel]);
+    // pass current loading status to onCancel to distinguish different case
+    onCancel && onCancel(submitLoading);
+  }, [onCancel, submitLoading]);
 
   return (
     <Modal size="xs" show={shouldShowModal}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleOk} appearance="primary">
+        <Button loading={submitLoading} onClick={handleOk} appearance="primary">
           {okButtonText}
         </Button>
         {showCancelButton && (
-          <Button onClick={handleCancel}>{cancelButtonText}</Button>
+          <Button
+            disabled={submitLoading && !canCancelOnLoading}
+            onClick={handleCancel}
+          >
+            {cancelButtonText}
+          </Button>
         )}
       </Modal.Footer>
     </Modal>
