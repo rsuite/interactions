@@ -34,6 +34,7 @@ export default function prompt(message, _default, modalConfig) {
         key={Date.now()}
         message={message}
         defaultResult={_default}
+        canCancelOnLoading={!!modalConfig?.onCancel}
         {...modalConfig}
         onOk={async (...args) => {
           let result;

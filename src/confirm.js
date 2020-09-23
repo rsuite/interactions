@@ -9,6 +9,7 @@ export default function confirm(message, modalConfig) {
     ReactDOM.render(
       <InteractionModal
         key={Date.now()}
+        canCancelOnLoading={!!modalConfig?.onCancel}
         {...modalConfig}
         onOk={async () => {
           let result;
