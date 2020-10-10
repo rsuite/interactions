@@ -35,9 +35,10 @@ function App() {
     alert('Queue for 2s to get a new iPhone', {
       okButtonText: 'Stand in line',
       onOk: () =>
-        getNTimeout(2000).then(() => {
-          alert('Congrats! You\'ve got a new iPhone!');
-        })
+        getNTimeout(2000)
+          .then(() => {
+            alert('Congrats! You\'ve got a new iPhone!');
+          })
     });
   }, []);
 
@@ -72,10 +73,10 @@ function App() {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
         onOk: () =>
-          getNTimeout().then(() => {
-            alert('Rest in pieces.');
-          }),
-        canCancelOnLoading: true,
+          getNTimeout()
+            .then(() => {
+              alert('Rest in pieces.');
+            })
       })
     ) {
       alert('Life is Simple! You make choices and you don\'t look back');
@@ -88,10 +89,10 @@ function App() {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
         onOk: () =>
-          getNTimeout().then(() => {
-            alert('Rest in pieces.');
-          }),
-        canCancelOnLoading: true,
+          getNTimeout()
+            .then(() => {
+              alert('Rest in pieces.');
+            }),
         onCancel: isSubmitLoading => {
           // will resolve false when click onCancel
           if (isSubmitLoading) {
@@ -100,7 +101,7 @@ function App() {
           } else {
             alert('is not submitLoading');
           }
-        },
+        }
       })
     ) {
       alert('Life is Simple! You make choices and you don\'t look back');
@@ -111,7 +112,7 @@ function App() {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
       cancelButtonText: 'I don\'t want to tell you'
-    });
+    })
     if (name) {
       alert(`It's ok, ${name}.`);
     }

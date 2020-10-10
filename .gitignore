@@ -41,5 +41,7 @@ yarn.lock
 assets
 
 dev-publish.sh
+<<<<<<< HEAD
 
 .idea
+.vscode
