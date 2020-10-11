@@ -11,7 +11,7 @@ class InteractionManager {
   $interactionMap = {
     alert,
     confirm,
-    prompt,
+    prompt
   };
 
   getInteractionMethod(method) {
@@ -38,7 +38,7 @@ class InteractionManager {
       try {
         await tail;
       } finally {
-        const interactionMethod = this.$interactionMap[method];
+        const interactionMethod = this.getInteractionMethod(method);
         resolve(interactionMethod(...args));
       }
     });
