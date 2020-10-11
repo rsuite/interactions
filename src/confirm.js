@@ -11,20 +11,37 @@ export default function confirm(message, modalConfig) {
         key={Date.now()}
         canCancelOnLoading={!!modalConfig?.onCancel}
         {...modalConfig}
-        onOk={async () => {
-          let result;
-          if (modalConfig && isFunction(modalConfig.onOk)) {
-            result = await modalConfig.onOk();
+        onOk={() => {
+          if (!isFunction(modalConfig?.onOk)) {
+            resolve(true);
+            return;
           }
-          resolve(true);
-
+          const result = modalConfig.onOk();
+          if (!(result instanceof Promise)) {
+            resolve(true);
+            return;
+          }
+          result.then(resolved => {
+            resolve(true);
+            return resolved;
+          });
           return result;
         }}
-        onCancel={async isSubmitLoading => {
-          if (modalConfig && isFunction(modalConfig.onCancel)) {
-            await modalConfig.onCancel(isSubmitLoading);
+        onCancel={isSubmitLoading => {
+          if (!isFunction(modalConfig?.onCancel)) {
+            resolve(false);
+            return;
           }
-          resolve(false);
+          const result = modalConfig.onCancel(isSubmitLoading);
+          if (!(result instanceof Promise)) {
+            resolve(false);
+            return;
+          }
+          result.then(resolved => {
+            resolve(false);
+            return resolved;
+          });
+          return result;
         }}
       >
         {message}

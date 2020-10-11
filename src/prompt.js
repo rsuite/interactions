@@ -36,20 +36,37 @@ export default function prompt(message, _default, modalConfig) {
         defaultResult={_default}
         canCancelOnLoading={!!modalConfig?.onCancel}
         {...modalConfig}
-        onOk={async (...args) => {
-          let result;
-          if (modalConfig && isFunction(modalConfig.onOk)) {
-            result = await modalConfig.onOk(...args);
+        onOk={(...args) => {
+          if (!isFunction(modalConfig?.onOk)) {
+            resolve(...args);
+            return;
           }
-          resolve(...args);
-
+          const result = modalConfig.onOk(...args);
+          if (!(result instanceof Promise)) {
+            resolve(...args);
+            return;
+          }
+          result.then(resolved => {
+            resolve(...args);
+            return resolved;
+          });
           return result;
         }}
-        onCancel={async isSubmitLoading => {
-          if (modalConfig && isFunction(modalConfig.onCancel)) {
-            await modalConfig.onCancel(isSubmitLoading);
+        onCancel={isSubmitLoading => {
+          if (!isFunction(modalConfig?.onCancel)) {
+            resolve(null);
+            return;
           }
-          resolve(null);
+          const result = modalConfig.onCancel(isSubmitLoading);
+          if (!(result instanceof Promise)) {
+            resolve(null);
+            return;
+          }
+          result.then(resolved => {
+            resolve(null);
+            return resolved;
+          });
+          return result;
         }}
       />,
       getContainerDOM()

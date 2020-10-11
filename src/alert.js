@@ -11,13 +11,20 @@ export default function alert(message, modalConfig) {
         key={Date.now()}
         showCancelButton={false}
         {...modalConfig}
-        onOk={async () => {
-          let result;
-          if (modalConfig && isFunction(modalConfig.onOk)) {
-            result = await modalConfig.onOk();
+        onOk={() => {
+          if (!isFunction(modalConfig?.onOk)) {
+            resolve();
+            return;
           }
-          resolve();
-
+          const result = modalConfig.onOk();
+          if (!(result instanceof Promise)) {
+            resolve();
+            return;
+          }
+          result.then(resolved => {
+            resolve();
+            return resolved;
+          });
           return result;
         }}
       >
