@@ -2,6 +2,8 @@
 
 > Call RSuite Modals like a boss.
 
+[![npm][npm-svg]][npm-home] [![GitHub Actions][actions-svg]][actions-home] 
+
     npm install @rsuite/interactions --save
 
 ## Features
@@ -118,3 +120,9 @@ interface PromptModalProps {
 ## License
 
 MIT licensed
+
+
+[npm-svg]: https://badge.fury.io/js/%40rsuite%2Finteractions.svg
+[npm-home]: https://www.npmjs.com/package/@rsuite/interactions
+[actions-svg]: https://github.com/rsuite/interactions/workflows/Node.js%20CI/badge.svg
+[actions-home]: https://github.com/rsuite/interactions/actions?query=workflow%3A%22Node.js+CI%22
