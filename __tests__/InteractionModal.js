@@ -77,6 +77,39 @@ describe('triggers callbacks', () => {
     expect(onCancel)
       .toBeCalled();
   });
+
+  describe('supports keyboard controls', () => {
+
+    it('calls onOk on pressing enter', async () => { const onOk = jest.fn();
+      renderModal('Hey', { onOk });
+      fireEvent.keyDown(document, {
+        key: 'Enter'
+      })
+
+      expect(onOk)
+        .toBeCalled();
+    });
+
+    it('calls onCancel on pressing ESC', async () => {
+      const onCancel = jest.fn();
+      renderModal('Hey', { onCancel });
+      fireEvent.keyDown(document, {
+        key: 'Escape'
+      })
+      expect(onCancel)
+        .toBeCalled();
+    });
+
+    it ('calls onOk on pressing ESC if showCancelButton is false', async () => {
+      const onOk = jest.fn();
+      renderModal('Hey', { onOk, showCancelButton: false });
+      fireEvent.keyDown(document, {
+        key: 'Escape'
+      })
+      expect(onOk)
+        .toBeCalled();
+    })
+  })
 });
 
 describe('waits for async onOk', () => {

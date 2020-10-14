@@ -77,47 +77,45 @@ it('renders custom button text', async () => {
     .toBe(cancelButtonText);
 });
 
-it('hides modal and resolves input value on clicking ok button', async () => {
+describe('resolves correctly', () => {
+  let promise;
   const inputValue = 'Input value';
-  const promise = prompt('Message');
-  modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
-  input = modal.querySelector('input');
-  okButton = modal.querySelector('.rs-btn-primary');
-  await userEvent.type(input, inputValue);
-  act(() => {
-    fireEvent.click(okButton);
+  beforeEach(async () => {
+    promise = prompt('Message');
+    modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
+    input = modal.querySelector('input');
+    userEvent.type(input, inputValue);
   });
-  expect(promise)
-    .resolves
-    .toBe(inputValue);
-  await act(() => promise);
-});
 
-it('hides modal and resolves default value on clicking ok button', async () => {
-  const defaultValue = 'Default value';
-  const promise = prompt('Message', defaultValue);
-  modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
-  okButton = modal.querySelector('.rs-btn-primary');
-  act(() => {
+  it('hides modal and resolves input value on clicking ok button', async () => {
+    okButton = modal.querySelector('.rs-btn-primary');
     fireEvent.click(okButton);
+    await expect(promise)
+      .resolves
+      .toBe(inputValue);
   });
-  expect(promise)
-    .resolves
-    .toBe(defaultValue);
-  await act(() => promise);
-});
 
-it('hides modal and resolves null on clicking cancel button', async () => {
-  const promise = prompt('Message');
-  modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
-  cancelButton = modal.querySelector('.rs-btn-default');
-  act(() => {
+  it('hides modal and resolves null on clicking cancel button', async () => {
+    cancelButton = modal.querySelector('.rs-btn-default');
     fireEvent.click(cancelButton);
+    await expect(promise)
+      .resolves
+      .toBe(null);
   });
-  expect(promise)
-    .resolves
-    .toBe(null);
-  await act(() => promise);
+
+  it('hides modal and resolves input value on pressing Enter', async () => {
+    fireEvent.keyDown(document, { key: 'Enter' });
+    await expect(promise)
+      .resolves
+      .toBe(inputValue);
+  });
+
+  it('hides modal and resolves null on pressing Esc', async () => {
+    fireEvent.keyDown(document, { key: 'Escape' });
+    await expect(promise)
+      .resolves
+      .toBe(null);
+  });
 });
 
 it('calls onOk on clicking ok button', async () => {
