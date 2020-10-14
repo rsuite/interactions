@@ -11,7 +11,7 @@ class InteractionManager {
   $interactionMap = {
     alert,
     confirm,
-    prompt
+    prompt,
   };
 
   getInteractionMethod(method) {
@@ -34,7 +34,7 @@ class InteractionManager {
   performInteraction(method, ...args) {
     const tail = this.$tail;
 
-    this.$tail = new Promise(async resolve => {
+    this.$tail = new Promise(async (resolve) => {
       try {
         await tail;
       } finally {

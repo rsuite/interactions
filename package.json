@@ -9,8 +9,7 @@
     "build": "rm -rf lib && babel src --out-dir lib ",
     "docs": "rm -rf assets &&  NODE_ENV=production webpack",
     "publish-docs": "node docs/gh-pages.js",
-    "lint": "eslint src  *.js",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -73,6 +72,7 @@
     "css-loader": "^2.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-flowtype": "^2.41.0",
     "eslint-plugin-import": "^2.6.1",
@@ -83,9 +83,11 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.3.0",
     "jest": "^26.5.2",
     "less": "^3.9.0",
     "less-loader": "^4.0.5",
+    "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
@@ -104,5 +106,14 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.7.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": "eslint --cache --fix",
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

@@ -5,15 +5,15 @@ const WARNING = 1;
 const ERROR = 2;
 
 module.exports = {
-  extends: 'airbnb',
+  extends: ['airbnb', 'prettier'],
   env: {
     browser: true,
     node: true,
     es6: true,
-    mocha: true
+    mocha: true,
   },
   globals: {
-    assert: true
+    assert: true,
   },
   parser: 'babel-eslint',
   plugins: ['react', 'babel', 'json', 'flowtype', 'react-hooks'],
@@ -22,8 +22,8 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true
-    }
+      experimentalObjectRestSpread: true,
+    },
   },
   rules: {
     indent: [ERROR, 2, { SwitchCase: 1 }], //规定代码的缩进方式：2个空格
@@ -73,8 +73,8 @@ module.exports = {
     /**
      * https://reactjs.org/docs/hooks-rules.html
      */
-    "react-hooks/rules-of-hooks": ERROR, // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": WARNING, // Checks effect dependencies
+    'react-hooks/rules-of-hooks': ERROR, // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': WARNING, // Checks effect dependencies
 
     /**
      * Flowtype
@@ -86,6 +86,6 @@ module.exports = {
     'flowtype/space-after-type-colon': OFF,
     'flowtype/space-before-type-colon': OFF,
     'flowtype/type-id-match': OFF,
-    'flowtype/use-flow-type': ERROR
-  }
+    'flowtype/use-flow-type': ERROR,
+  },
 };

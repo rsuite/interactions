@@ -8,12 +8,12 @@ function InteractionModal({
   cancelButtonText = '取消',
   onCancel,
   children,
-  canCancelOnLoading = false
+  canCancelOnLoading = false,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const handleReturnValueOfOnOk = useCallback(returnValueOfOnOk => {
+  const handleReturnValueOfOnOk = useCallback((returnValueOfOnOk) => {
     if (!returnValueOfOnOk || !returnValueOfOnOk.then) {
       setShouldShowModal(false);
       return;
@@ -56,7 +56,6 @@ function InteractionModal({
     }
 
     if (shouldShowModal) {
-
       document.addEventListener('keydown', handleKeyDown, false);
 
       return () => {

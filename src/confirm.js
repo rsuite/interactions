@@ -27,7 +27,7 @@ export default function confirm(message, modalConfig) {
           });
           return result;
         }}
-        onCancel={isSubmitLoading => {
+        onCancel={(isSubmitLoading) => {
           modalConfig?.onCancel?.(isSubmitLoading);
           resolve(false);
         }}

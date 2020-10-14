@@ -2,7 +2,7 @@
 
 > Call RSuite Modals like a boss.
 
-[![npm][npm-svg]][npm-home] [![GitHub Actions][actions-svg]][actions-home] 
+[![npm][npm-svg]][npm-home] [![GitHub Actions][actions-svg]][actions-home]
 
     npm install @rsuite/interactions --save
 
@@ -42,6 +42,7 @@ interface AlertModalProps {
   onOk?: (() => void) | (() => Promise<any>);
 }
 ```
+
 - `okButtonText`: Customize "OK" button text.
 - `onOk`: Callback function when "OK" is clicked. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
 
@@ -120,7 +121,6 @@ interface PromptModalProps {
 ## License
 
 MIT licensed
-
 
 [npm-svg]: https://badge.fury.io/js/%40rsuite%2Finteractions.svg
 [npm-home]: https://www.npmjs.com/package/@rsuite/interactions

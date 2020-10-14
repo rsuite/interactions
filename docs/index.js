@@ -17,17 +17,17 @@ const getNTimeout = (n = 2000, result = true) =>
 
 function App() {
   const buyNewPhone = useCallback(() => {
-    alert('Congrats! You\'ve got a new iPhone!', {
-      okButtonText: 'Hooray!'
+    alert("Congrats! You've got a new iPhone!", {
+      okButtonText: 'Hooray!',
     });
   }, []);
 
   const buyNewPhoneOk = useCallback(() => {
-    alert('Congrats! You\'ve got a new iPhone!', {
+    alert("Congrats! You've got a new iPhone!", {
       okButtonText: 'Hooray!',
       onOk: () => {
         alert('You clicked Hooray!');
-      }
+      },
     });
   }, []);
 
@@ -35,10 +35,9 @@ function App() {
     alert('Queue for 2s to get a new iPhone', {
       okButtonText: 'Stand in line',
       onOk: () =>
-        getNTimeout(2000)
-          .then(() => {
-            alert('Congrats! You\'ve got a new iPhone!');
-          })
+        getNTimeout(2000).then(() => {
+          alert("Congrats! You've got a new iPhone!");
+        }),
     });
   }, []);
 
@@ -46,7 +45,7 @@ function App() {
     if (
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
-        cancelButtonText: 'No'
+        cancelButtonText: 'No',
       })
     ) {
       alert('Rest in pieces.');
@@ -60,7 +59,7 @@ function App() {
         cancelButtonText: 'No',
         onOk: () => {
           alert('You just clicked Yes');
-        }
+        },
       })
     ) {
       alert('Rest in pieces.');
@@ -73,13 +72,12 @@ function App() {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
         onOk: () =>
-          getNTimeout()
-            .then(() => {
-              alert('Rest in pieces.');
-            })
+          getNTimeout().then(() => {
+            alert('Rest in pieces.');
+          }),
       })
     ) {
-      alert('Life is Simple! You make choices and you don\'t look back');
+      alert("Life is Simple! You make choices and you don't look back");
     }
   }, []);
 
@@ -89,11 +87,10 @@ function App() {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
         onOk: () =>
-          getNTimeout()
-            .then(() => {
-              alert('Rest in pieces.');
-            }),
-        onCancel: isSubmitLoading => {
+          getNTimeout().then(() => {
+            alert('Rest in pieces.');
+          }),
+        onCancel: (isSubmitLoading) => {
           // will resolve false when click onCancel
           if (isSubmitLoading) {
             alert('is submitLoading');
@@ -101,18 +98,18 @@ function App() {
           } else {
             alert('is not submitLoading');
           }
-        }
+        },
       })
     ) {
-      alert('Life is Simple! You make choices and you don\'t look back');
+      alert("Life is Simple! You make choices and you don't look back");
     }
   }, []);
 
   const promptForName = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you'
-    })
+      cancelButtonText: "I don't want to tell you",
+    });
     if (name) {
       alert(`It's ok, ${name}.`);
     }
@@ -121,12 +118,12 @@ function App() {
   const promptForNameOk = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you',
-      onOk: inputVal => {
+      cancelButtonText: "I don't want to tell you",
+      onOk: (inputVal) => {
         if (inputVal) {
           alert(`You've confirmed your name, ${inputVal}`);
         }
-      }
+      },
     });
     if (name) {
       alert(`It's ok, ${name}.`);
@@ -136,19 +133,21 @@ function App() {
   const promptForNameAsync = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you',
+      cancelButtonText: "I don't want to tell you",
       // eslint-disable-next-line consistent-return
-      onOk: nameInput => {
+      onOk: (nameInput) => {
         if (nameInput) {
           return getNTimeout(2000, false)
             .then(() => {
               alert(`Hi, ${nameInput}, Don't say Sorry, say GoodBye`);
             })
             .catch(() => {
-              alert(`Hi, ${nameInput}, System Error, pls contact administrator`);
+              alert(
+                `Hi, ${nameInput}, System Error, pls contact administrator`
+              );
             });
         }
-      }
+      },
     });
     if (name) {
       alert(`Thanks for your collaboration, ${name}`);
@@ -160,7 +159,11 @@ function App() {
       <h1>Interactions</h1>
       <p>Call RSuite Modal at ease.</p>
       <p>
-        <a href="https://github.com/rsuite/interactions" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://github.com/rsuite/interactions"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           https://github.com/rsuite/interactions
         </a>
       </p>
@@ -171,7 +174,7 @@ function App() {
         <ButtonToolbar>
           <Button onClick={buyNewPhone}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhone}>Then smash it!</Button>
-          <Button onClick={promptForName}>{'I\'m so sorry.'}</Button>
+          <Button onClick={promptForName}>{"I'm so sorry."}</Button>
         </ButtonToolbar>
       </div>
       <hr />
@@ -181,7 +184,7 @@ function App() {
         <ButtonToolbar>
           <Button onClick={buyNewPhoneOk}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneOk}>Then smash it!</Button>
-          <Button onClick={promptForNameOk}>{'I\'m so sorry.'}</Button>
+          <Button onClick={promptForNameOk}>{"I'm so sorry."}</Button>
         </ButtonToolbar>
       </div>
       <hr />
@@ -191,7 +194,7 @@ function App() {
         <ButtonToolbar>
           <Button onClick={buyNewPhoneAsync}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneAsync}>Then smash it!</Button>
-          <Button onClick={promptForNameAsync}>{'I\'m so sorry.'}</Button>
+          <Button onClick={promptForNameAsync}>{"I'm so sorry."}</Button>
         </ButtonToolbar>
       </div>
       <hr />
