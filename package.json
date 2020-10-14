@@ -86,6 +86,7 @@
     "jest": "^26.5.2",
     "less": "^3.9.0",
     "less-loader": "^4.0.5",
+    "prettier": "^2.1.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-hot-loader": "^3.1.3",
