@@ -5,7 +5,7 @@ import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
 
 export default function confirm(message, modalConfig) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     ReactDOM.render(
       <InteractionModal
         key={Date.now()}
@@ -21,27 +21,15 @@ export default function confirm(message, modalConfig) {
             resolve(true);
             return;
           }
-          result.then(resolved => {
+          result.then((resolved) => {
             resolve(true);
             return resolved;
           });
           return result;
         }}
         onCancel={isSubmitLoading => {
-          if (!isFunction(modalConfig?.onCancel)) {
-            resolve(false);
-            return;
-          }
-          const result = modalConfig.onCancel(isSubmitLoading);
-          if (!(result instanceof Promise)) {
-            resolve(false);
-            return;
-          }
-          result.then(resolved => {
-            resolve(false);
-            return resolved;
-          });
-          return result;
+          modalConfig?.onCancel?.(isSubmitLoading);
+          resolve(false);
         }}
       >
         {message}
