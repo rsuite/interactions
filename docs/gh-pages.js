@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 var ghpages = require('gh-pages');
 var path = require('path');
 

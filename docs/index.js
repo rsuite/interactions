@@ -17,13 +17,13 @@ const getNTimeout = (n = 2000, result = true) =>
 
 function App() {
   const buyNewPhone = useCallback(() => {
-    alert("Congrats! You've got a new iPhone!", {
+    alert('Congrats! You\'ve got a new iPhone!', {
       okButtonText: 'Hooray!',
     });
   }, []);
 
   const buyNewPhoneOk = useCallback(() => {
-    alert("Congrats! You've got a new iPhone!", {
+    alert('Congrats! You\'ve got a new iPhone!', {
       okButtonText: 'Hooray!',
       onOk: () => {
         alert('You clicked Hooray!');
@@ -36,7 +36,7 @@ function App() {
       okButtonText: 'Stand in line',
       onOk: () =>
         getNTimeout(2000).then(() => {
-          alert("Congrats! You've got a new iPhone!");
+          alert('Congrats! You\'ve got a new iPhone!');
         }),
     });
   }, []);
@@ -77,7 +77,7 @@ function App() {
           }),
       })
     ) {
-      alert("Life is Simple! You make choices and you don't look back");
+      alert('Life is Simple! You make choices and you don\'t look back');
     }
   }, []);
 
@@ -101,14 +101,14 @@ function App() {
         },
       })
     ) {
-      alert("Life is Simple! You make choices and you don't look back");
+      alert('Life is Simple! You make choices and you don\'t look back');
     }
   }, []);
 
   const promptForName = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: "I don't want to tell you",
+      cancelButtonText: 'I don\'t want to tell you',
     });
     if (name) {
       alert(`It's ok, ${name}.`);
@@ -118,7 +118,7 @@ function App() {
   const promptForNameOk = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: "I don't want to tell you",
+      cancelButtonText: 'I don\'t want to tell you',
       onOk: (inputVal) => {
         if (inputVal) {
           alert(`You've confirmed your name, ${inputVal}`);
@@ -133,7 +133,7 @@ function App() {
   const promptForNameAsync = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: "I don't want to tell you",
+      cancelButtonText: 'I don\'t want to tell you',
       // eslint-disable-next-line consistent-return
       onOk: (nameInput) => {
         if (nameInput) {
@@ -169,37 +169,37 @@ function App() {
       </p>
       <hr />
       <div className="example">
-        {'Simple Usage'}
+        Simple Usage
         <br />
         <ButtonToolbar>
           <Button onClick={buyNewPhone}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhone}>Then smash it!</Button>
-          <Button onClick={promptForName}>{"I'm so sorry."}</Button>
+          <Button onClick={promptForName}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
       </div>
       <hr />
       <div className="example">
-        {'onOk: normal function'}
+        onOk: normal function
         <br />
         <ButtonToolbar>
           <Button onClick={buyNewPhoneOk}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneOk}>Then smash it!</Button>
-          <Button onClick={promptForNameOk}>{"I'm so sorry."}</Button>
+          <Button onClick={promptForNameOk}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
       </div>
       <hr />
       <div className="example">
-        {'onOk: Promise Chain'}
+        onOk: Promise Chain
         <br />
         <ButtonToolbar>
           <Button onClick={buyNewPhoneAsync}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneAsync}>Then smash it!</Button>
-          <Button onClick={promptForNameAsync}>{"I'm so sorry."}</Button>
+          <Button onClick={promptForNameAsync}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
       </div>
       <hr />
       <div className="example">
-        {'onOk: Promise Chain; then onCancel'}
+        onOk: Promise Chain; then onCancel
         <br />
         <ButtonToolbar>
           <Button onClick={confirmSmashPhoneCancelAsync}>Then smash it!</Button>

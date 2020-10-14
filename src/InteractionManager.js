@@ -34,13 +34,11 @@ class InteractionManager {
   performInteraction(method, ...args) {
     const tail = this.$tail;
 
-    this.$tail = new Promise(async (resolve) => {
-      try {
-        await tail;
-      } finally {
+    this.$tail = new Promise((resolve) => {
+      Promise.resolve(tail).finally(() => {
         const interactionMethod = this.getInteractionMethod(method);
         resolve(interactionMethod(...args));
-      }
+      });
     });
 
     return this.$tail;
