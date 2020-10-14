@@ -67,54 +67,64 @@ it('renders custom button text', async () => {
     .toBe(cancelButtonText);
 });
 
-it('hides modal and resolves true on clicking ok button', async () => {
-  const promise = confirm('Message')
-    .then(result => {
-      expect(result)
-        .toBe(true);
-    });
-  modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
-  okButton = modal.querySelector('.rs-btn-primary');
-  await act(() => {
-    fireEvent.click(okButton);
-    return promise;
-  });
-});
+describe('resolves correctly', () => {
 
-it('hides modal and resolves false on clicking cancel button', async () => {
-  confirm('Message')
-    .then(result => {
-      expect(result)
-        .toBe(false);
-    });
-  modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
-  cancelButton = modal.querySelector('.rs-btn-default');
-  act(() => {
+  let promise;
+
+  beforeEach(async () => {
+    promise = confirm('Message');
+    modal = (await screen.findAllByRole('dialog')).find(div => div.classList.contains('rs-modal'));
+    okButton = modal.querySelector('.rs-btn-primary');
+    cancelButton = modal.querySelector('.rs-btn-default');
+  });
+
+  it('hides modal and resolves true on clicking ok button', async () => {
+    fireEvent.click(okButton);
+
+    await expect(promise)
+      .resolves
+      .toBe(true);
+  });
+
+  it('hides modal and resolves false on clicking cancel button', async () => {
     fireEvent.click(cancelButton);
+
+    await expect(promise)
+      .resolves
+      .toBe(false);
+  });
+
+  it('hides modal and resolves true on pressing Enter', async () => {
+    fireEvent.keyDown(document, { key: 'Enter' });
+    await expect(promise)
+      .resolves
+      .toBe(true);
+  });
+
+  it('hides modal and false true on pressing Esc', async () => {
+    fireEvent.keyDown(document, { key: 'Escape' });
+    await expect(promise)
+      .resolves
+      .toBe(false);
   });
 });
 
 it('calls onOk on clicking ok button', async () => {
   const onOk = jest.fn();
-  await act(async () => {
-    await openConfirm('Message', {
-      onOk
-    });
-    fireEvent.click(okButton);
+  await openConfirm('Message', {
+    onOk
   });
-
+  fireEvent.click(okButton);
   expect(onOk)
     .toBeCalled();
 });
 
 it('calls onCancel on clicking cancel button', async () => {
   const onCancel = jest.fn();
-  await act(async () => {
-    await openConfirm('Message', {
-      onCancel
-    });
-    fireEvent.click(cancelButton);
+  await openConfirm('Message', {
+    onCancel
   });
+  fireEvent.click(cancelButton);
 
   expect(onCancel)
     .toBeCalled();

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Button, Modal } from 'rsuite';
 
 function InteractionModal({
@@ -36,6 +36,34 @@ function InteractionModal({
     // pass current loading status to onCancel to distinguish different case
     onCancel && onCancel(submitLoading);
   }, [onCancel, submitLoading]);
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleOk();
+      }
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        if (showCancelButton) {
+          handleCancel();
+        } else {
+          handleOk();
+        }
+      }
+    }
+
+    if (shouldShowModal) {
+
+      document.addEventListener('keydown', handleKeyDown, false);
+
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown, false);
+      };
+    }
+  }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
   return (
     <Modal size="xs" show={shouldShowModal}>
