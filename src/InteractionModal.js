@@ -68,9 +68,6 @@ function InteractionModal({
     <Modal size="xs" show={shouldShowModal}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
-        <Button loading={submitLoading} onClick={handleOk} appearance="primary">
-          {okButtonText}
-        </Button>
         {showCancelButton && (
           <Button
             disabled={submitLoading && !canCancelOnLoading}
@@ -79,6 +76,9 @@ function InteractionModal({
             {cancelButtonText}
           </Button>
         )}
+        <Button loading={submitLoading} onClick={handleOk} appearance="primary">
+          {okButtonText}
+        </Button>
       </Modal.Footer>
     </Modal>
   );
