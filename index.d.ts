@@ -26,7 +26,7 @@ export function alert(
   modalConfig?: AlertModalProps
 ): Promise<void>;
 
-export function prompt(
+export function confirm(
   message?: React.ReactNode,
   modalConfig?: ConfirmModalProps
 ): Promise<boolean>;
