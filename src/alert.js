@@ -5,7 +5,7 @@ import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
 
 export default function alert(message, modalConfig) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     ReactDOM.render(
       <InteractionModal
         key={Date.now()}
@@ -16,16 +16,20 @@ export default function alert(message, modalConfig) {
             resolve();
             return;
           }
-          const result = modalConfig.onOk();
-          if (!(result instanceof Promise)) {
-            resolve();
-            return;
+          try {
+            const result = modalConfig.onOk();
+            if (!(result instanceof Promise)) {
+              resolve();
+              return;
+            }
+            result.then((resolved) => {
+              resolve();
+              return resolved;
+            }, reject);
+            return result;
+          } catch (e) {
+            reject(e);
           }
-          result.then((resolved) => {
-            resolve();
-            return resolved;
-          });
-          return result;
         }}
       >
         {message}

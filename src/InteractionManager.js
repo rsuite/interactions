@@ -28,20 +28,31 @@ class InteractionManager {
         new Error(`No such interaction '${method}' found.`)
       );
     }
-    return this.performInteraction(method, ...args);
+
+    const newTail = this.$tail
+      ? this.queueInteraction(this.$tail, method, ...args)
+      : this.performInteraction(method, ...args);
+
+    newTail.finally(() => {
+      if (this.$tail === newTail) {
+        this.$tail = null;
+      }
+    });
+    this.$tail = newTail;
+
+    return this.$tail;
+  }
+
+  queueInteraction(tail, method, ...args) {
+    return new Promise((resolve, reject) => {
+      tail.finally(() => {
+        this.performInteraction(method, ...args).then(resolve, reject);
+      });
+    });
   }
 
   performInteraction(method, ...args) {
-    const tail = this.$tail;
-
-    this.$tail = new Promise((resolve) => {
-      Promise.resolve(tail).finally(() => {
-        const interactionMethod = this.getInteractionMethod(method);
-        resolve(interactionMethod(...args));
-      });
-    });
-
-    return this.$tail;
+    return this.getInteractionMethod(method)(...args);
   }
 }
 

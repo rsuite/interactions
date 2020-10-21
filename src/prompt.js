@@ -24,7 +24,7 @@ function PromptModal({ message, defaultResult = '', onOk, ...props }) {
 }
 
 export default function prompt(message, _default, modalConfig) {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     ReactDOM.render(
       <PromptModal
         key={Date.now()}
@@ -37,16 +37,20 @@ export default function prompt(message, _default, modalConfig) {
             resolve(...args);
             return;
           }
-          const result = modalConfig.onOk(...args);
-          if (!(result instanceof Promise)) {
-            resolve(...args);
-            return;
+          try {
+            const result = modalConfig.onOk(...args);
+            if (!(result instanceof Promise)) {
+              resolve(...args);
+              return;
+            }
+            result.then((resolved) => {
+              resolve(...args);
+              return resolved;
+            }, reject);
+            return result;
+          } catch (e) {
+            reject(e);
           }
-          result.then((resolved) => {
-            resolve(...args);
-            return resolved;
-          });
-          return result;
         }}
         onCancel={(isSubmitLoading) => {
           modalConfig?.onCancel?.(isSubmitLoading);
