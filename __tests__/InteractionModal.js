@@ -5,6 +5,7 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
   act,
+  screen,
 } from '@testing-library/react';
 import InteractionModal from '../src/InteractionModal';
 
@@ -14,33 +15,42 @@ function renderModal(message, props) {
   );
 
   const modal = baseElement.querySelector('.rs-modal');
-  const okButton = modal.querySelector('.rs-btn-primary');
-  const cancelButton = modal.querySelector('.rs-btn-default');
-  return { modal, okButton, cancelButton };
+  const cancelButton = screen.queryByRole('button', {
+    name: '取消',
+  });
+  const okButton = screen.queryByRole('button', {
+    name: '确定',
+  });
+
+  return { modal, cancelButton, okButton };
 }
 
 describe('renders modal', () => {
   it('shows modal with message text and buttons', () => {
-    const { modal, okButton, cancelButton } = renderModal('Hey');
-    expect(getByText(modal, 'Hey')).not.toBeNull();
-    expect(okButton).not.toBeNull();
-    expect(cancelButton).not.toBeNull();
+    const { modal, cancelButton, okButton } = renderModal('Hey');
+    expect(modal).toHaveTextContent('Hey');
+    expect(okButton).toBeInTheDocument();
+    expect(cancelButton).toBeInTheDocument();
   });
 
   it('hides cancel button if showCancelButton is false', () => {
     const { cancelButton } = renderModal('Hey', { showCancelButton: false });
-    expect(cancelButton).toBeNull();
+    expect(cancelButton).not.toBeInTheDocument();
   });
 
   it('renders custom button text', () => {
     const okButtonText = 'Okay';
     const cancelButtonText = 'Nah';
-    const { okButton, cancelButton } = renderModal('Hey', {
+    renderModal('Hey', {
       okButtonText,
       cancelButtonText,
     });
-    expect(okButton.textContent).toBe(okButtonText);
-    expect(cancelButton.textContent).toBe(cancelButtonText);
+    expect(
+      screen.getByRole('button', { name: cancelButtonText })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('button', { name: okButtonText })
+    ).toBeInTheDocument();
   });
 
   it('hides modal on clicking ok button', async () => {
@@ -61,14 +71,14 @@ describe('triggers callbacks', () => {
     const onOk = jest.fn();
     const { okButton } = renderModal('Hey', { onOk });
     fireEvent.click(okButton);
-    expect(onOk).toBeCalled();
+    expect(onOk).toHaveBeenCalled();
   });
 
   it('calls onCancel on clicking cancel button', () => {
     const onCancel = jest.fn();
     const { cancelButton } = renderModal('Hey', { onCancel });
     fireEvent.click(cancelButton);
-    expect(onCancel).toBeCalled();
+    expect(onCancel).toHaveBeenCalled();
   });
 
   describe('supports keyboard controls', () => {
@@ -79,7 +89,7 @@ describe('triggers callbacks', () => {
         key: 'Enter',
       });
 
-      expect(onOk).toBeCalled();
+      expect(onOk).toHaveBeenCalled();
     });
 
     it('calls onCancel on pressing ESC', async () => {
@@ -88,7 +98,7 @@ describe('triggers callbacks', () => {
       fireEvent.keyDown(document, {
         key: 'Escape',
       });
-      expect(onCancel).toBeCalled();
+      expect(onCancel).toHaveBeenCalled();
     });
 
     it('calls onOk on pressing ESC if showCancelButton is false', async () => {
@@ -97,7 +107,7 @@ describe('triggers callbacks', () => {
       fireEvent.keyDown(document, {
         key: 'Escape',
       });
-      expect(onOk).toBeCalled();
+      expect(onOk).toHaveBeenCalled();
     });
   });
 });
@@ -120,7 +130,7 @@ describe('waits for async onOk', () => {
     const asyncOnOk = jest.fn(() => (promise = Promise.resolve()));
     const { okButton, cancelButton } = renderModal('Hey', { onOk: asyncOnOk });
     fireEvent.click(okButton);
-    expect(cancelButton.classList).toContain('rs-btn-disabled');
+    expect(cancelButton).toBeDisabled();
     await act(() => promise);
   });
 
@@ -131,7 +141,7 @@ describe('waits for async onOk', () => {
       canCancelOnLoading: true,
     });
     fireEvent.click(okButton);
-    expect(cancelButton.classList).not.toContain('rs-btn-disabled');
+    expect(cancelButton).not.toBeDisabled();
     await act(() => promise);
   });
 });
