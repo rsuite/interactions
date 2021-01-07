@@ -65,7 +65,7 @@ function InteractionModal({
   }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
   return (
-    <Modal size="xs" show={shouldShowModal}>
+    <Modal size="xs" open={shouldShowModal}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         {showCancelButton && (
