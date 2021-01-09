@@ -64,8 +64,13 @@ function InteractionModal({
     }
   }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
+  /** 通过 open 属性判断当前 rsuite 版本 */
+  const modalProps = {
+    ['open' in Modal.propTypes ? 'open' : 'show']: shouldShowModal,
+  };
+
   return (
-    <Modal size="xs" open={shouldShowModal}>
+    <Modal size="xs" {...modalProps}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         {showCancelButton && (
