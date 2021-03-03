@@ -73,9 +73,7 @@ describe('resolves correctly', () => {
   const inputValue = 'Input value';
   beforeEach(async () => {
     promise = prompt('Message');
-    modal = (await screen.findAllByRole('dialog')).find((div) =>
-      div.classList.contains('rs-modal')
-    );
+    modal = (await screen.findByText('Message')).closest('.rs-modal');
     input = modal.querySelector('input');
     userEvent.type(input, inputValue);
   });

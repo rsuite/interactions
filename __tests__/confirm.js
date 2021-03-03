@@ -64,9 +64,7 @@ describe('resolves correctly', () => {
 
   beforeEach(async () => {
     promise = confirm('Message');
-    modal = (await screen.findAllByRole('dialog')).find((div) =>
-      div.classList.contains('rs-modal')
-    );
+    modal = (await screen.findByText('Message')).closest('.rs-modal');
     okButton = modal.querySelector('.rs-btn-primary');
     cancelButton = modal.querySelector('.rs-btn-default');
   });

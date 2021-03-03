@@ -13,9 +13,7 @@ let okButton;
 async function openAlert(message, options) {
   await closeAlert();
   alert(message, options);
-  modal = (await screen.findAllByRole('dialog')).find((div) =>
-    div.classList.contains('rs-modal')
-  );
+  modal = (await screen.findByText(message)).closest('.rs-modal');
   okButton = modal.querySelector('.rs-btn-primary');
 }
 
