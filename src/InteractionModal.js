@@ -64,9 +64,16 @@ function InteractionModal({
     }
   }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
-  /** 通过 open 属性判断当前 rsuite 版本 */
+  /**
+   * using open/show judge by rsuite version
+   * @example @3 propTypes undefined
+   * @example @4 no 'open' in propTypes
+   * @example @4 'open' in propTypes
+   */
   const modalProps = {
-    ['open' in Modal.propTypes ? 'open' : 'show']: shouldShowModal,
+    [Modal.propTypes && 'open' in Modal.propTypes
+      ? 'open'
+      : 'show']: shouldShowModal,
   };
 
   return (
