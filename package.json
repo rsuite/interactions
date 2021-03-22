@@ -10,8 +10,8 @@
     "docs": "rm -rf assets &&  NODE_ENV=production webpack",
     "publish-docs": "node docs/gh-pages.js",
     "test": "npm run test:4 && npm run test:5",
-    "test:4": "jest",
-    "test:5": "RSUITE=5 && jest",
+    "test:4": "RSUITE=4 jest",
+    "test:5": "RSUITE=5 jest",
     "prepublishOnly": "npm run build && npm test"
   },
   "repository": {
