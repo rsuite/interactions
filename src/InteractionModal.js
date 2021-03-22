@@ -64,8 +64,20 @@ function InteractionModal({
     }
   }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
+  /**
+   * using open/show judge by rsuite version
+   * @example @3 propTypes undefined
+   * @example @4 no 'open' in propTypes
+   * @example @4 'open' in propTypes
+   */
+  const modalProps = {
+    [Modal.propTypes && 'open' in Modal.propTypes
+      ? 'open'
+      : 'show']: shouldShowModal,
+  };
+
   return (
-    <Modal size="xs" show={shouldShowModal}>
+    <Modal size="xs" {...modalProps}>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>
         {showCancelButton && (
