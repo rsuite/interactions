@@ -5,20 +5,35 @@ import InteractionModal from './InteractionModal';
 import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
 
-function PromptModal({ message, defaultResult = '', onOk, ...props }) {
+function PromptModal({
+  message,
+  defaultResult = '',
+  onOk,
+  inputProps,
+  style,
+  ...props
+}) {
+  const { onChange: onInputChange, style: inputStyle, ...restInputProps } =
+    inputProps || {};
   const [result, setResult] = useState(defaultResult);
 
   const handleOk = useCallback(() => onOk(result), [onOk, result]);
 
   return (
     <InteractionModal {...props} onOk={handleOk}>
-      {message}
-      <Input
-        autoFocus
-        value={result}
-        onChange={(value) => setResult(value)}
-        style={{ marginTop: 10 }}
-      />
+      <div style={{ padding: '5px' }} className="modal-content">
+        {message}
+        <Input
+          autoFocus
+          value={result}
+          onChange={(value) => {
+            setResult(value);
+            onInputChange?.(value);
+          }}
+          style={{ marginTop: 10, ...inputStyle }}
+          {...restInputProps}
+        />
+      </div>
     </InteractionModal>
   );
 }

@@ -196,3 +196,16 @@ describe('triggers callbacks', () => {
     });
   });
 });
+
+describe('resolve input props in modal config', () => {
+  it('input should be disabled', async () => {
+    prompt('Message', '', {
+      inputProps: {
+        disabled: true,
+      },
+    });
+    modal = (await screen.findByText('Message')).closest('.rs-modal');
+    input = modal.querySelector('input');
+    expect(input.hasAttribute('disabled')).toBe(true);
+  });
+});

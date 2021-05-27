@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InputProps } from 'rsuite/lib/Input';
 
 interface AlertModalProps {
   okButtonText?: string;
@@ -19,6 +20,7 @@ interface PromptModalProps {
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
+  inputProps?: InputProps;
 }
 
 export function alert(
