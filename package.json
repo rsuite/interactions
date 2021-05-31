@@ -1,6 +1,6 @@
 {
   "name": "@rsuite/interactions",
-  "version": "0.0.0-development",
+  "version": "1.4.0",
   "description": "Call rsuite Modal at ease.",
   "main": "lib",
   "types": "index.d.ts",
