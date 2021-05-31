@@ -1,6 +1,6 @@
 {
   "name": "@rsuite/interactions",
-  "version": "1.4.0",
+  "version": "0.0.0-development",
   "description": "Call rsuite Modal at ease.",
   "main": "lib",
   "types": "index.d.ts",
@@ -12,11 +12,12 @@
     "test": "npm run test:4 && npm run test:5",
     "test:4": "RSUITE=4 jest",
     "test:5": "RSUITE=5 jest",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm run build && npm test",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rsuite/interactions.git"
+    "url": "https://github.com/rsuite/interactions.git"
   },
   "files": [
     "lib",
@@ -104,7 +105,8 @@
     "url-loader": "^2.2.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "semantic-release": "^17.4.3"
   },
   "browserslist": [
     "> 1%",
