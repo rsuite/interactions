@@ -9,9 +9,7 @@
     "build": "rm -rf lib && babel src --out-dir lib ",
     "docs": "rm -rf assets &&  NODE_ENV=production webpack",
     "publish-docs": "node docs/gh-pages.js",
-    "test": "npm run test:4 && npm run test:5",
-    "test:4": "RSUITE=4 jest",
-    "test:5": "RSUITE=5 jest",
+    "test": "jest",
     "prepublishOnly": "npm run build && npm test",
     "semantic-release": "semantic-release"
   },
