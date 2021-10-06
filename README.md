@@ -2,7 +2,9 @@
 
 > Call RSuite Modals like a boss.
 
-[![npm][npm-svg]][npm-home] [![GitHub Actions][actions-svg]][actions-home]
+[![npm][npm-svg]][npm-home]
+[![GitHub Actions][actions-svg]][actions-home]
+[![codecov](https://codecov.io/gh/rsuite/interactions/branch/master/graph/badge.svg)](https://codecov.io/gh/rsuite/interactions)
 
     npm install @rsuite/interactions --save
 
