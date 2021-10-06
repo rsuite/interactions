@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-if (process.env.RSUITE === '5') {
+if (process.env.RSUITE_VERSION === '5') {
   jest.mock(
     'date-fns/_lib/toInteger/index.js',
     () => {
