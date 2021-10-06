@@ -5,7 +5,7 @@ import {
   findByText,
   act,
 } from '@testing-library/react';
-import { confirm } from '../src';
+import confirm from '../confirm';
 
 let modal;
 let okButton;

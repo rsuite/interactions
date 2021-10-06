@@ -1,5 +1,5 @@
-import manager from '../src/InteractionManager';
 import { screen, fireEvent } from '@testing-library/react';
+import manager from '../InteractionManager';
 
 it('should throw if invalid methods are requested', async () => {
   const dialog = jest.fn(

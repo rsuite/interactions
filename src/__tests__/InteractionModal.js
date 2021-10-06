@@ -7,7 +7,7 @@ import {
   act,
   screen,
 } from '@testing-library/react';
-import InteractionModal from '../src/InteractionModal';
+import InteractionModal from '../InteractionModal';
 
 function renderModal(message, props) {
   const { baseElement } = render(

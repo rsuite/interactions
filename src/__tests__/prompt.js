@@ -6,7 +6,7 @@ import {
   act,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { prompt } from '../src';
+import prompt from '../prompt';
 
 let modal;
 let input;

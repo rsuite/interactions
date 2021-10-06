@@ -5,7 +5,7 @@ import {
   findByText,
   act,
 } from '@testing-library/react';
-import { alert } from '../src';
+import alert from '../alert';
 
 let modal;
 let okButton;
