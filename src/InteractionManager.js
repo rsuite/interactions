@@ -54,6 +54,10 @@ class InteractionManager {
   performInteraction(method, ...args) {
     return this.getInteractionMethod(method)(...args);
   }
+
+  resetQueue() {
+    this.$tail = null;
+  }
 }
 
 export default new InteractionManager();
