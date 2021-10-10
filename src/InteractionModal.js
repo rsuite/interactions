@@ -77,8 +77,13 @@ function InteractionModal({
   };
 
   return (
-    <Modal size="xs" {...modalProps}>
-      <Modal.Body>{children}</Modal.Body>
+    <Modal
+      role="alertdialog"
+      size="xs"
+      aria-describedby="alertdialog-description"
+      {...modalProps}
+    >
+      <Modal.Body id="alertdialog-description">{children}</Modal.Body>
       <Modal.Footer>
         {showCancelButton && (
           <Button

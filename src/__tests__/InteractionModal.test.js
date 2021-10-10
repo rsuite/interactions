@@ -9,11 +9,11 @@ import {
 import userEvent from '@testing-library/user-event';
 import InteractionModal from '../InteractionModal';
 
-it('shows a dialog with message text and buttons', () => {
+it('shows an alert dialog with message text and buttons', () => {
   const message = 'Hey';
   const { getByRole } = render(<InteractionModal>{message}</InteractionModal>);
 
-  const dialog = getByRole('dialog');
+  const dialog = getByRole('alertdialog');
   expect(dialog).toBeVisible();
   expect(dialog).toHaveTextContent(message);
 
@@ -60,14 +60,14 @@ it('hides dialog on clicking ok button', async () => {
   const { getByRole } = render(<InteractionModal></InteractionModal>);
 
   userEvent.click(getByRole('button', { name: '确定' }));
-  await waitForElementToBeRemoved(getByRole('dialog'));
+  await waitForElementToBeRemoved(getByRole('alertdialog'));
 });
 
 it('hides dialog on clicking cancel button', async () => {
   const { getByRole } = render(<InteractionModal></InteractionModal>);
 
   userEvent.click(getByRole('button', { name: '取消' }));
-  await waitForElementToBeRemoved(getByRole('dialog'));
+  await waitForElementToBeRemoved(getByRole('alertdialog'));
 });
 
 it('calls onOk on clicking ok button', () => {

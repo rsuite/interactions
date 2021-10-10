@@ -16,7 +16,7 @@ it('shows dialog with given message and an ok button', () => {
   const message = 'Message';
 
   alert(message);
-  const dialog = screen.getByRole('dialog');
+  const dialog = screen.getByRole('alertdialog');
   expect(dialog).toBeVisible();
   expect(dialog).toHaveTextContent(message);
 
@@ -30,7 +30,7 @@ it('closes on clicking ok button', async () => {
 
   userEvent.click(screen.getByRole('button', { name: '确定' }));
 
-  await waitForElementToBeRemoved(screen.getByRole('dialog'));
+  await waitForElementToBeRemoved(screen.getByRole('alertdialog'));
 });
 
 it('renders custom ok button text', () => {
@@ -88,7 +88,7 @@ describe('triggers callbacks', () => {
 
     it('closes after Promise finishes', async () => {
       jest.advanceTimersByTime(1000);
-      await waitForElementToBeRemoved(screen.getByRole('dialog'));
+      await waitForElementToBeRemoved(screen.getByRole('alertdialog'));
     });
   });
 });

@@ -17,7 +17,7 @@ it('shows dialog with given message and an text input and two buttons', async ()
   const message = 'Message';
   prompt(message);
 
-  const dialog = screen.getByRole('dialog');
+  const dialog = screen.getByRole('alertdialog');
   expect(dialog).toBeVisible();
   expect(dialog).toHaveTextContent(message);
 
@@ -231,7 +231,7 @@ describe('triggers callbacks', () => {
       act(() => {
         jest.advanceTimersByTime(1000);
       });
-      await waitForElementToBeRemoved(screen.getByRole('dialog'));
+      await waitForElementToBeRemoved(screen.getByRole('alertdialog'));
       jest.useRealTimers();
     });
   });
