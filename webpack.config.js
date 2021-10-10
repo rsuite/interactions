@@ -18,7 +18,7 @@ const plugins = [
   }),
   extractLess,
   new HtmlwebpackPlugin({
-    title: 'Responsive Nav',
+    title: 'RSuite Interactions',
     filename: 'index.html',
     template: 'docs/index.html',
     inject: true,
@@ -85,13 +85,6 @@ const common = {
         ],
       },
     ],
-  },
-  resolve: {
-    alias: {
-      rsuite: path.resolve(__dirname, './node_modules/rsuite5'),
-      react: path.resolve(__dirname, './node_modules/react17'),
-      'react-dom': path.resolve(__dirname, './node_modules/react-dom17'),
-    },
   },
 };
 
