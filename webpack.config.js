@@ -36,6 +36,9 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
+/**
+ * @type import('webpack').Configuration
+ */
 const common = {
   entry: path.resolve(__dirname, 'docs/index.js'),
   devServer: {
@@ -82,6 +85,11 @@ const common = {
         ],
       },
     ],
+  },
+  resolve: {
+    alias: {
+      rsuite: path.resolve(__dirname, './node_modules/rsuite5'),
+    },
   },
 };
 
