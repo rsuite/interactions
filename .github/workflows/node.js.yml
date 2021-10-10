@@ -18,9 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        rsuite-version:
-          - 4
-          - 5
+        rsuite: [4, 5]
+        react: [16, 17]
+        exclude:
+          # RSuite 4 does not work with react 17
+          - rsuite: 4
+            react: 17
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js LTS
@@ -31,8 +34,9 @@ jobs:
     - run: npm run build --if-present
     - run: npm test -- --coverage
       env:
-        RSUITE_VERSION: ${{ matrix.rsuite-version }}
+        RSUITE_VERSION: ${{ matrix.rsuite }}
+        REACT_VERSION: ${{ matrix.react }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
-        flags: 'RSuite ${{ matrix.rsuite-version }}'
+        flags: 'RSuite ${{ matrix.rsuite }} React ${{ matrix.react }}'
