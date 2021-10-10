@@ -30,6 +30,21 @@ it('shows dialog with given message and an text input and two buttons', async ()
   ).toBeInTheDocument();
 });
 
+it('Should lock focus on the text input', () => {
+  prompt('Message');
+
+  const dialog = screen.getByRole('alertdialog');
+  const textbox = within(dialog).getByRole('textbox');
+
+  // Textbox has focus initially
+  expect(textbox).toHaveFocus();
+
+  userEvent.tab();
+
+  // Still has focus after user presses Tab
+  expect(textbox).toHaveFocus();
+});
+
 it('renders default value', async () => {
   const defaultValue = 'Default value';
   prompt('Message', defaultValue);
