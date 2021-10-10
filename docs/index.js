@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
-import { Button, ButtonToolbar } from 'rsuite';
+import { Button, ButtonToolbar, Divider, Panel } from 'rsuite';
 import { alert, confirm, prompt } from '../src';
 import './styles.less';
 
@@ -34,10 +34,10 @@ function App() {
   const buyNewPhoneAsync = useCallback(() => {
     alert('Queue for 2s to get a new iPhone', {
       okButtonText: 'Stand in line',
-      onOk: () =>
-        getNTimeout(2000).then(() => {
-          alert('Congrats! You\'ve got a new iPhone!');
-        }),
+      onOk: async () => {
+        await getNTimeout(2000);
+        alert('Congrats! You\'ve got a new iPhone!');
+      },
     });
   }, []);
 
@@ -71,10 +71,10 @@ function App() {
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
-        onOk: () =>
-          getNTimeout().then(() => {
-            alert('Rest in pieces.');
-          }),
+        onOk: async () => {
+          await getNTimeout();
+          alert('Rest in pieces.');
+        },
       })
     ) {
       alert('Life is Simple! You make choices and you don\'t look back');
@@ -86,10 +86,10 @@ function App() {
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
         cancelButtonText: 'No',
-        onOk: () =>
-          getNTimeout().then(() => {
-            alert('Rest in pieces.');
-          }),
+        onOk: async () => {
+          await getNTimeout();
+          alert('Rest in pieces.');
+        },
         onCancel: (isSubmitLoading) => {
           // will resolve false when click onCancel
           if (isSubmitLoading) {
@@ -135,17 +135,14 @@ function App() {
       okButtonText: 'This is my name',
       cancelButtonText: 'I don\'t want to tell you',
       // eslint-disable-next-line consistent-return
-      onOk: (nameInput) => {
+      onOk: async (nameInput) => {
         if (nameInput) {
-          return getNTimeout(2000, false)
-            .then(() => {
-              alert(`Hi, ${nameInput}, Don't say Sorry, say GoodBye`);
-            })
-            .catch(() => {
-              alert(
-                `Hi, ${nameInput}, System Error, pls contact administrator`
-              );
-            });
+          try {
+            await getNTimeout(2000, false);
+            alert(`Hi, ${nameInput}, Don't say Sorry, say GoodBye`);
+          } catch {
+            alert(`Hi, ${nameInput}, System Error, pls contact administrator`);
+          }
         }
       },
     });
@@ -156,8 +153,8 @@ function App() {
 
   return (
     <div className="page">
-      <h1>Interactions</h1>
-      <p>Call RSuite Modal at ease.</p>
+      <h1>RSuite Interactions</h1>
+      <p>Handy alert dialogs.</p>
       <p>
         <a
           href="https://github.com/rsuite/interactions"
@@ -168,43 +165,35 @@ function App() {
         </a>
       </p>
       <hr />
-      <div className="example">
-        Simple Usage
-        <br />
+      <Panel header="Basic" bordered>
         <ButtonToolbar>
           <Button onClick={buyNewPhone}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhone}>Then smash it!</Button>
           <Button onClick={promptForName}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
-      </div>
-      <hr />
-      <div className="example">
-        onOk: normal function
-        <br />
+      </Panel>
+      <Divider />
+      <Panel header="Callback" bordered>
         <ButtonToolbar>
           <Button onClick={buyNewPhoneOk}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneOk}>Then smash it!</Button>
           <Button onClick={promptForNameOk}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
-      </div>
-      <hr />
-      <div className="example">
-        onOk: Promise Chain
-        <br />
+      </Panel>
+      <Divider />
+      <Panel header="Async callback" bordered>
         <ButtonToolbar>
           <Button onClick={buyNewPhoneAsync}>Buy a new iPhone</Button>
           <Button onClick={confirmSmashPhoneAsync}>Then smash it!</Button>
           <Button onClick={promptForNameAsync}>I&apos;m so sorry.</Button>
         </ButtonToolbar>
-      </div>
-      <hr />
-      <div className="example">
-        onOk: Promise Chain; then onCancel
-        <br />
+      </Panel>
+      <Divider />
+      <Panel header="Abort async callback" bordered>
         <ButtonToolbar>
           <Button onClick={confirmSmashPhoneCancelAsync}>Then smash it!</Button>
         </ButtonToolbar>
-      </div>
+      </Panel>
     </div>
   );
 }

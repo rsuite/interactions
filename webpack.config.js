@@ -18,7 +18,7 @@ const plugins = [
   }),
   extractLess,
   new HtmlwebpackPlugin({
-    title: 'Responsive Nav',
+    title: 'RSuite Interactions',
     filename: 'index.html',
     template: 'docs/index.html',
     inject: true,
