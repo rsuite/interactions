@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, ButtonToolbar, Divider, Panel } from 'rsuite';
 import { alert, confirm, prompt } from '../src';
-import './styles.less';
+import './styles.css';
 
 const getNTimeout = (n = 2000, result = true) =>
   new Promise((resolve, reject) => {
@@ -17,13 +17,13 @@ const getNTimeout = (n = 2000, result = true) =>
 
 function App() {
   const buyNewPhone = useCallback(() => {
-    alert('Congrats! You\'ve got a new iPhone!', {
+    alert("Congrats! You've got a new iPhone!", {
       okButtonText: 'Hooray!',
     });
   }, []);
 
   const buyNewPhoneOk = useCallback(() => {
-    alert('Congrats! You\'ve got a new iPhone!', {
+    alert("Congrats! You've got a new iPhone!", {
       okButtonText: 'Hooray!',
       onOk: () => {
         alert('You clicked Hooray!');
@@ -36,7 +36,7 @@ function App() {
       okButtonText: 'Stand in line',
       onOk: async () => {
         await getNTimeout(2000);
-        alert('Congrats! You\'ve got a new iPhone!');
+        alert("Congrats! You've got a new iPhone!");
       },
     });
   }, []);
@@ -77,7 +77,7 @@ function App() {
         },
       })
     ) {
-      alert('Life is Simple! You make choices and you don\'t look back');
+      alert("Life is Simple! You make choices and you don't look back");
     }
   }, []);
 
@@ -101,14 +101,14 @@ function App() {
         },
       })
     ) {
-      alert('Life is Simple! You make choices and you don\'t look back');
+      alert("Life is Simple! You make choices and you don't look back");
     }
   }, []);
 
   const promptForName = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you',
+      cancelButtonText: "I don't want to tell you",
     });
     if (name) {
       alert(`It's ok, ${name}.`);
@@ -118,7 +118,7 @@ function App() {
   const promptForNameOk = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you',
+      cancelButtonText: "I don't want to tell you",
       onOk: (inputVal) => {
         if (inputVal) {
           alert(`You've confirmed your name, ${inputVal}`);
@@ -133,7 +133,7 @@ function App() {
   const promptForNameAsync = useCallback(async () => {
     const name = await prompt('What is your name?', '', {
       okButtonText: 'This is my name',
-      cancelButtonText: 'I don\'t want to tell you',
+      cancelButtonText: "I don't want to tell you",
       // eslint-disable-next-line consistent-return
       onOk: async (nameInput) => {
         if (nameInput) {

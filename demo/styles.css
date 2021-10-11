@@ -1,4 +1,4 @@
-@import '~rsuite/styles/index.less';
+@import 'rsuite/dist/rsuite.min.css';
 
 .page {
   padding: 50px;
