@@ -2,11 +2,12 @@
   "name": "@rsuite/interactions",
   "version": "1.4.0",
   "description": "Call rsuite Modal at ease.",
-  "main": "lib",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "types": "index.d.ts",
   "scripts": {
     "dev": "vite demo",
-    "build": "rm -rf lib && babel src --out-dir lib ",
+    "build": "rollup --config",
     "docs": "vite build",
     "publish-docs": "node docs/gh-pages.js",
     "test": "jest",
@@ -18,9 +19,11 @@
     "url": "https://github.com/rsuite/interactions.git"
   },
   "files": [
-    "lib",
+    "cjs",
+    "esm",
     "src",
-    "*.d.ts"
+    "*.d.ts",
+    "!**/__tests__"
   ],
   "keywords": [
     "react",
@@ -64,10 +67,13 @@
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^21.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.0.4",
     "@testing-library/user-event": "^12.1.7",
@@ -95,6 +101,7 @@
     "react-dom17": "npm:react-dom@^17.0.2",
     "react16": "npm:react@^16.8.0",
     "react17": "npm:react@^17.0.2",
+    "rollup": "^2.58.0",
     "rsuite": "^5.0.1",
     "rsuite4": "npm:rsuite@^4.10.3",
     "rsuite5": "npm:rsuite@^5.0.1",
@@ -106,9 +113,6 @@
     "last 2 versions",
     "not ie < 10"
   ],
-  "dependencies": {
-    "@babel/runtime": "^7.7.4"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
