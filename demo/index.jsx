@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { Button, ButtonToolbar, Divider, Panel } from 'rsuite';
 import { alert, confirm, prompt } from '../src';
-import './styles.less';
+import './styles.css';
 
 const getNTimeout = (n = 2000, result = true) =>
   new Promise((resolve, reject) => {
