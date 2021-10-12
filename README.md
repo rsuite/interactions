@@ -120,6 +120,46 @@ interface PromptModalProps {
 - `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
 - `canCancelOnLoading`: When `onCancel` is set, you can still use this option to force disable "Cancel" button.
 
+## Testability
+
+If you use `@rsuite/interactions` to call alert dialogs in your app, you can easily test it with `@testing-library/react`.
+
+Say you want to show a confirm dialog when user clicks a button that will delete a post:
+
+```jsx
+import { confirm } from '@rsuite/interactions';
+
+function App() {
+  async function confirmDeletePost(id) {
+    if (await confirm('Are you sure?')) {
+      await api.deletePost(id);
+    }
+  }
+
+  return <button onClick={() => confirmDeletePost(1)}>Delete post 1</button>;
+}
+```
+
+And you want to test that the dialog is shown when the button is clicked:
+
+```jsx
+import { render, fireEvent, screen } from '@testing-library/react';
+
+it('Should show a confirm dialog', () => {
+  const { getByRole } = render(<App />);
+
+  fireEvent.click(getByRole('button', { name: /delete post/i }));
+
+  // Assume you're using Jest with @testing-library/jest-dom
+  const dialog = screen.getByRole('alertdialog');
+  expect(dialog).toBeVisible();
+  // Assert on its a11y description
+  expect(dialog).toHaveAccessibleDescription('Are you sure?');
+  // Or if you're using jest-dom < 5.14, you can assert on its textContent
+  expect(dialog).toHaveTextContent('Are you sure?');
+});
+```
+
 ## License
 
 MIT licensed
