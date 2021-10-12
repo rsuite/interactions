@@ -6,7 +6,7 @@
 [![GitHub Actions][actions-svg]][actions-home]
 [![codecov](https://codecov.io/gh/rsuite/interactions/branch/master/graph/badge.svg)](https://codecov.io/gh/rsuite/interactions)
 
-    npm install @rsuite/interactions --save
+    npm install @rsuite/interactions@next --save
 
 ## Features
 
@@ -164,7 +164,7 @@ it('Should show a confirm dialog', () => {
 
 MIT licensed
 
-[npm-svg]: https://badge.fury.io/js/%40rsuite%2Finteractions.svg
+[npm-svg]: https://badgen.net/npm/v/@rsuite/interactions/next
 [npm-home]: https://www.npmjs.com/package/@rsuite/interactions
 [actions-svg]: https://github.com/rsuite/interactions/workflows/Node.js%20CI/badge.svg
 [actions-home]: https://github.com/rsuite/interactions/actions?query=workflow%3A%22Node.js+CI%22
