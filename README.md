@@ -111,6 +111,7 @@ interface PromptModalProps {
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
+  inputProps?: InputProps;
 }
 ```
 
@@ -119,6 +120,7 @@ interface PromptModalProps {
 - `onOk`: Callback function when "OK" is clicked, receiving a string representing the user input. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
 - `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
 - `canCancelOnLoading`: When `onCancel` is set, you can still use this option to force disable "Cancel" button.
+- `inputProps`: custom input properties, learn more information about `InputProps` from [here](https://rsuitejs.com/components/input#code-lt-input-gt-code)
 
 ## License
 
