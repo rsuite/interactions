@@ -1,0 +1,7 @@
+@import 'rsuite/dist/rsuite.min.css';
+
+.page {
+  padding: 50px;
+  max-width: 1280px;
+  margin: 0 auto;
+}

@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - 'ci/**'
+      - next
 
 jobs:
   release:
@@ -18,7 +18,3 @@ jobs:
       - run: npm ci
       - name: Semantic Release
         run: npx semantic-release
-        if: ${{ github.ref == 'refs/heads/master' }}
-      - name: Semantic Release (Dry run)
-        run: npx semantic-release --dry-run
-        if: ${{ startsWith(github.ref, 'refs/heads/ci') }}

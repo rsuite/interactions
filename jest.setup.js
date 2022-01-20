@@ -25,3 +25,32 @@ if (process.env.RSUITE_VERSION === '5') {
     return jest.requireActual('rsuite4');
   });
 }
+
+switch (process.env.REACT_VERSION) {
+  case '16':
+    jest.mock('react', () => {
+      return jest.requireActual('react16');
+    });
+
+    jest.mock('react-dom', () => {
+      return jest.requireActual('react-dom16');
+    });
+    jest.mock('react-dom/test-utils', () => {
+      return jest.requireActual('react-dom16/test-utils');
+    });
+    break;
+  case '17':
+    jest.mock('react', () => {
+      return jest.requireActual('react17');
+    });
+
+    jest.mock('react-dom', () => {
+      return jest.requireActual('react-dom17');
+    });
+    jest.mock('react-dom/test-utils', () => {
+      return jest.requireActual('react-dom17/test-utils');
+    });
+    break;
+  default:
+    break;
+}
