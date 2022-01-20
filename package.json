@@ -1,6 +1,6 @@
 {
   "name": "@rsuite/interactions",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Call rsuite Modal at ease.",
   "main": "cjs/index.js",
   "module": "esm/index.js",
