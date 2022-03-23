@@ -17,6 +17,7 @@ interface ConfirmModalProps {
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  validate?: (inputValue: string) => boolean;
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;

@@ -9,6 +9,7 @@ function PromptModal({
   message,
   defaultResult = '',
   onOk,
+  validate,
   inputProps,
   style,
   ...props
@@ -20,7 +21,11 @@ function PromptModal({
   const handleOk = useCallback(() => onOk(result), [onOk, result]);
 
   return (
-    <InteractionModal {...props} onOk={handleOk}>
+    <InteractionModal
+      {...props}
+      okButtonDisabled={validate?.(result) === false}
+      onOk={handleOk}
+    >
       <div style={{ padding: '5px' }} className="modal-content">
         {message}
         <Input
