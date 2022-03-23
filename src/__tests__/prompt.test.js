@@ -68,6 +68,24 @@ it('renders custom button text', async () => {
   ).toBeInTheDocument();
 });
 
+it('disable OK button if validation fails', () => {
+  prompt('Message', '', {
+    validate: () => false,
+  });
+
+  expect(screen.getByRole('button', { name: '确定' })).toBeDisabled();
+});
+
+it('enable OK button when validation passes', () => {
+  prompt('Message', '', {
+    validate: (value) => value === 'expected',
+  });
+
+  userEvent.type(screen.getByRole('textbox'), 'expected');
+
+  expect(screen.getByRole('button', { name: '确定' })).not.toBeDisabled();
+});
+
 describe('resolves correctly', () => {
   const inputValue = 'Input value';
 
