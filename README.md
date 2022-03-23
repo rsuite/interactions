@@ -108,6 +108,7 @@ prompt(
 interface PromptModalProps {
   okButtonText?: string;
   cancelButtonText?: string;
+  valdiate?: (inputValue: string) => void;
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
@@ -117,12 +118,13 @@ interface PromptModalProps {
 
 - `okButtonText`: Customize "OK" button text.
 - `cancelButtonText`: Customize "Cancel" button text.
+- `validate`: Validate current input value. Disable OK button if validation fails.
 - `onOk`: Callback function when "OK" is clicked, receiving a string representing the user input. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
 - `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
 - `canCancelOnLoading`: When `onCancel` is set, you can still use this option to force disable "Cancel" button.
 - `inputProps`: custom input properties, learn more information about `InputProps` from [here](https://rsuitejs.com/components/input#code-lt-input-gt-code)
 
-## Testability
+## Testing
 
 If you use `@rsuite/interactions` to call alert dialogs in your app, you can easily test it with `@testing-library/react`.
 
