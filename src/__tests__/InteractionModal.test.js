@@ -56,9 +56,11 @@ it('renders custom button text', () => {
   expect(getByRole('button', { name: okButtonText })).toBeInTheDocument();
 });
 
-it('disables ok button when okButtonDisabled=true', () => {
+it('accepts custom props on ok button via okButtonProps prop', () => {
   const { getByRole } = render(
-    <InteractionModal okButtonDisabled>Hey</InteractionModal>
+    <InteractionModal okButtonProps={{ color: 'red', disabled: true }}>
+      Hey
+    </InteractionModal>
   );
 
   expect(
@@ -66,6 +68,11 @@ it('disables ok button when okButtonDisabled=true', () => {
       name: '确定',
     })
   ).toBeDisabled();
+  expect(
+    within(getByRole('alertdialog')).getByRole('button', {
+      name: '确定',
+    })
+  ).toHaveClass('rs-btn-red');
 });
 
 it('hides dialog on clicking ok button', async () => {

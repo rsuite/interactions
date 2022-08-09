@@ -78,6 +78,7 @@ interface ConfirmModalProps {
 ```
 
 - `okButtonText`: Customize "OK" button text.
+- `okButtonDangerous`: When set `true`, "OK" button is red colored.
 - `cancelButtonText`: Customize "Cancel" button text.
 - `onOk`: Callback function when "OK" is clicked. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
 - `onCancel`: Callback function when "Cancel" is clicked. If not provided, "Cancel" is disabled when "OK" is loading.
@@ -117,6 +118,7 @@ interface PromptModalProps {
 ```
 
 - `okButtonText`: Customize "OK" button text.
+- `okButtonDangerous`: When set `true`, "OK" button is red colored.
 - `cancelButtonText`: Customize "Cancel" button text.
 - `validate`: Validate current input value. Disable OK button if validation fails.
 - `onOk`: Callback function when "OK" is clicked, receiving a string representing the user input. If `onOk` returns a `Promise`, "OK" button shows loading status until the promise finishes.
