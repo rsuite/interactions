@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import { Input } from 'rsuite';
 import InteractionModal from './InteractionModal';
@@ -8,6 +8,7 @@ import { isFunction } from './utils';
 function PromptModal({
   message,
   defaultResult = '',
+  okButtonDangerous = false,
   onOk,
   validate,
   inputProps,
@@ -20,10 +21,19 @@ function PromptModal({
 
   const handleOk = useCallback(() => onOk(result), [onOk, result]);
 
+  const okButtonDisabled = useMemo(() => {
+    return validate?.(result) === false;
+  }, [result, validate]);
+
+  const okButtonColor = okButtonDangerous ? 'red' : undefined;
+
   return (
     <InteractionModal
       {...props}
-      okButtonDisabled={validate?.(result) === false}
+      okButtonProps={{
+        color: okButtonColor,
+        disabled: okButtonDisabled,
+      }}
       onOk={handleOk}
     >
       <div style={{ padding: '5px' }} className="modal-content">

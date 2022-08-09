@@ -46,6 +46,16 @@ it('renders custom button text', async () => {
   ).toBeInTheDocument();
 });
 
+it('renders red ok button when okButtonDangerous=true', () => {
+  confirm('Message', {
+    okButtonDangerous: true,
+  });
+
+  expect(screen.getByRole('button', { name: '确定' })).toHaveClass(
+    'rs-btn-red'
+  );
+});
+
 describe('resolves correctly', () => {
   it('hides modal and resolves true on clicking ok button', async () => {
     const promise = confirm('Message');

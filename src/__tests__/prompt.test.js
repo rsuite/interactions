@@ -68,6 +68,16 @@ it('renders custom button text', async () => {
   ).toBeInTheDocument();
 });
 
+it('renders red ok button when okButtonDangerous=true', () => {
+  prompt('Message', '', {
+    okButtonDangerous: true,
+  });
+
+  expect(screen.getByRole('button', { name: '确定' })).toHaveClass(
+    'rs-btn-red'
+  );
+});
+
 it('disable OK button if validation fails', () => {
   prompt('Message', '', {
     validate: () => false,

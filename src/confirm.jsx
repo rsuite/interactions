@@ -4,13 +4,19 @@ import InteractionModal from './InteractionModal';
 import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
 
-export default function confirm(message, modalConfig) {
+export default function confirm(
+  message,
+  { okButtonDangerous = false, ...modalConfig } = {}
+) {
   return new Promise((resolve, reject) => {
     ReactDOM.render(
       <InteractionModal
         key={Date.now()}
         canCancelOnLoading={!!modalConfig?.onCancel}
         {...modalConfig}
+        okButtonProps={{
+          color: okButtonDangerous ? 'red' : undefined,
+        }}
         onOk={() => {
           if (!isFunction(modalConfig?.onOk)) {
             resolve(true);

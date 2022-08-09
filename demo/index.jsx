@@ -45,6 +45,7 @@ function App() {
     if (
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
+        okButtonDangerous: true,
         cancelButtonText: 'No',
       })
     ) {
@@ -56,6 +57,7 @@ function App() {
     if (
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
+        okButtonDangerous: true,
         cancelButtonText: 'No',
         onOk: () => {
           alert('You just clicked Yes');
@@ -70,6 +72,7 @@ function App() {
     if (
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
+        okButtonDangerous: true,
         cancelButtonText: 'No',
         onOk: async () => {
           await getNTimeout();
@@ -85,6 +88,7 @@ function App() {
     if (
       await confirm('Are you sure you want to do this?', {
         okButtonText: 'Yes',
+        okButtonDangerous: true,
         cancelButtonText: 'No',
         onOk: async () => {
           await getNTimeout();

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { InputProps } from 'rsuite/lib/Input';
+import type { InputProps } from 'rsuite';
 
 interface AlertModalProps {
   okButtonText?: string;
@@ -8,6 +8,7 @@ interface AlertModalProps {
 
 interface ConfirmModalProps {
   okButtonText?: string;
+  okButtonDangerous?: boolean;
   cancelButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
@@ -16,6 +17,7 @@ interface ConfirmModalProps {
 
 interface PromptModalProps {
   okButtonText?: string;
+  okButtonDangerous?: boolean;
   cancelButtonText?: string;
   validate?: (inputValue: string) => boolean;
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);

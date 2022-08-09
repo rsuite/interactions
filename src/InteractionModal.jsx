@@ -3,7 +3,7 @@ import { Button, Modal } from 'rsuite';
 
 function InteractionModal({
   okButtonText = '确定',
-  okButtonDisabled = false,
+  okButtonProps,
   onOk,
   showCancelButton = true,
   cancelButtonText = '取消',
@@ -100,9 +100,9 @@ function InteractionModal({
         )}
         <Button
           loading={submitLoading}
-          disabled={okButtonDisabled}
           onClick={handleOk}
           appearance="primary"
+          {...okButtonProps}
         >
           {okButtonText}
         </Button>
