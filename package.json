@@ -85,7 +85,7 @@
     "rsuite": "^5.0.1",
     "rsuite4": "npm:rsuite@^4.10.3",
     "rsuite5": "npm:rsuite@^5.0.1",
-    "semantic-release": "^17.4.3",
+    "semantic-release": "^19.0.3",
     "vite": "^2.6.5"
   },
   "browserslist": [
