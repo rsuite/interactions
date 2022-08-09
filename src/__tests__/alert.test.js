@@ -55,6 +55,29 @@ describe('triggers callbacks', () => {
     expect(onOk).toHaveBeenCalled();
   });
 
+  it('works with async onOk function', async () => {
+    const asyncOnOk = jest.fn(
+      () =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        })
+    );
+    const promise = alert('Message', {
+      async onOk() {
+        await asyncOnOk();
+      },
+    });
+
+    const okButton = screen.getByRole('button', { name: '确定' });
+    userEvent.click(okButton);
+
+    expect(asyncOnOk).toHaveBeenCalled();
+
+    await act(() => promise);
+  });
+
   describe('waits for async onOk', () => {
     let promise;
     beforeEach(async () => {
