@@ -1,12 +1,16 @@
 import * as React from 'react';
-import type { InputProps } from 'rsuite';
+import type { InputProps, ModalProps } from 'rsuite';
 
-interface AlertModalProps {
+interface WrappedModalProps {
+  modalProps: ModalProps;
+}
+
+interface AlertModalProps extends WrappedModalProps {
   okButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
 }
 
-interface ConfirmModalProps {
+interface ConfirmModalProps extends WrappedModalProps {
   okButtonText?: string;
   okButtonDangerous?: boolean;
   cancelButtonText?: string;
@@ -15,7 +19,7 @@ interface ConfirmModalProps {
   canCancelOnLoading?: boolean;
 }
 
-interface PromptModalProps {
+interface PromptModalProps extends WrappedModalProps {
   okButtonText?: string;
   okButtonDangerous?: boolean;
   cancelButtonText?: string;
