@@ -39,7 +39,11 @@ alert(
   modalConfig?: AlertModalProps
 ): Promise<void>;
 
-interface AlertModalProps {
+interface WrappedModalProps {
+  modalProps: ModalProps;
+}
+
+interface AlertModalProps extends WrappedModalProps {
   okButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
 }
@@ -68,8 +72,12 @@ confirm(
   modalConfig?: ConfirmModalProps
 ): Promise<boolean>;
 
-interface ConfirmModalProps {
+interface WrappedModalProps {
+  modalProps: ModalProps;
+}
+interface ConfirmModalProps extends WrappedModalProps {
   okButtonText?: string;
+  okButtonDangerous?: boolean;
   cancelButtonText?: string;
   onOk?: (() => void) | (() => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
@@ -106,10 +114,14 @@ prompt(
   modalConfig?: PromptModalProps
 ): Promise<string | null>;
 
-interface PromptModalProps {
+interface WrappedModalProps {
+  modalProps: ModalProps;
+}
+interface PromptModalProps extends WrappedModalProps {
   okButtonText?: string;
+  okButtonDangerous?: boolean;
   cancelButtonText?: string;
-  valdiate?: (inputValue: string) => void;
+  validate?: (inputValue: string) => boolean;
   onOk?: ((inputVal?: string) => void) | ((inputVal: string) => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;

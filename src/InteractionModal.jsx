@@ -10,6 +10,7 @@ function InteractionModal({
   onCancel,
   children,
   canCancelOnLoading = false,
+  modalProps: extraModalProps = {},
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -79,6 +80,7 @@ function InteractionModal({
     [Modal.propTypes && 'open' in Modal.propTypes
       ? 'open'
       : 'show']: shouldShowModal,
+    ...extraModalProps,
   };
 
   return (
