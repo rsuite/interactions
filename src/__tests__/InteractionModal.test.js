@@ -109,6 +109,14 @@ it('calls onCancel on clicking cancel button', () => {
   expect(onCancel).toHaveBeenCalled();
 });
 
+it('forwards modalProps to modal', () => {
+  const { getByRole } = render(
+    <InteractionModal modalProps={{ role: 'article' }}></InteractionModal>
+  );
+
+  expect(getByRole('article')).toBeInTheDocument();
+});
+
 describe('supports keyboard controls', () => {
   it('calls onOk on pressing enter', async () => {
     const onOk = jest.fn();

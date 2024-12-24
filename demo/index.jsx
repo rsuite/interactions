@@ -155,6 +155,14 @@ function App() {
     }
   }, []);
 
+  const forwardsModalProps = () => {
+    confirm('forwards modal props', {
+      modalProps: {
+        size: 'lg',
+      },
+    });
+  };
+
   return (
     <div className="page">
       <h1>RSuite Interactions</h1>
@@ -196,6 +204,12 @@ function App() {
       <Panel header="Abort async callback" bordered>
         <ButtonToolbar>
           <Button onClick={confirmSmashPhoneCancelAsync}>Then smash it!</Button>
+        </ButtonToolbar>
+      </Panel>
+      <Divider />
+      <Panel header="forward modal's props" bordered>
+        <ButtonToolbar>
+          <Button onClick={forwardsModalProps}>forwards modal props</Button>
         </ButtonToolbar>
       </Panel>
     </div>
