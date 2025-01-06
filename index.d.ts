@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { InputProps, ModalProps } from 'rsuite';
 
 interface WrappedModalProps {
-  modalProps: ModalProps;
+  modalProps?: ModalProps;
 }
 
 interface AlertModalProps extends WrappedModalProps {
