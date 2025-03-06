@@ -1,6 +1,6 @@
 {
   "name": "@rsuite/interactions",
-  "version": "2.0.0",
+  "version": "2.4.0",
   "description": "Call rsuite Modal at ease.",
   "main": "cjs/index.js",
   "module": "esm/index.js",
@@ -45,9 +45,9 @@
   },
   "homepage": "https://github.com/rsuite/interactions#readme",
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "rsuite": "^4.0.0 || ^5.0.1"
+    "react": ">=18",
+    "react-dom": ">=18",
+    "rsuite": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -76,8 +76,8 @@
     "jest": "^26.5.2",
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-dom16": "npm:react-dom@^16.8.0",
     "react-dom17": "npm:react-dom@^17.0.2",
     "react16": "npm:react@^16.8.0",
