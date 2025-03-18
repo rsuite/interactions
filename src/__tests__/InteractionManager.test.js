@@ -1,4 +1,4 @@
-import { screen, fireEvent } from '@testing-library/react';
+import { screen, fireEvent, act } from '@testing-library/react';
 import manager from '../InteractionManager';
 
 it('should throw if invalid methods are requested', async () => {
@@ -9,8 +9,10 @@ it('should throw if invalid methods are requested', async () => {
 });
 
 it('Queues multiple interaction requests', async () => {
-  manager.requestInteraction('alert', 'Message 1');
-  manager.requestInteraction('alert', 'Message 2');
+  act(() => {
+    manager.requestInteraction('alert', 'Message 1');
+    manager.requestInteraction('alert', 'Message 2');
+  });
 
   const modal2 = screen.queryByText('Message 2', {
     selector: '.rs-modal-body',

@@ -1,9 +1,8 @@
 import React, { useCallback, useState, useMemo } from 'react';
-import ReactDOM from 'react-dom';
 import { Input } from 'rsuite';
 import InteractionModal from './InteractionModal';
-import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
+import getRoot from './getRoot';
 
 function PromptModal({
   message,
@@ -15,8 +14,11 @@ function PromptModal({
   style,
   ...props
 }) {
-  const { onChange: onInputChange, style: inputStyle, ...restInputProps } =
-    inputProps || {};
+  const {
+    onChange: onInputChange,
+    style: inputStyle,
+    ...restInputProps
+  } = inputProps || {};
   const [result, setResult] = useState(defaultResult);
 
   const handleOk = useCallback(() => onOk(result), [onOk, result]);
@@ -55,7 +57,7 @@ function PromptModal({
 
 export default function prompt(message, _default, modalConfig) {
   return new Promise((resolve, reject) => {
-    ReactDOM.render(
+    getRoot().render(
       <PromptModal
         key={Date.now()}
         message={message}
@@ -86,8 +88,7 @@ export default function prompt(message, _default, modalConfig) {
           modalConfig?.onCancel?.(isSubmitLoading);
           resolve(null);
         }}
-      />,
-      getContainerDOM()
+      />
     );
   });
 }

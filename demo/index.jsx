@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Button, ButtonToolbar, Divider, Panel } from 'rsuite';
 import { alert, confirm, prompt } from '../src';
 import './styles.css';
@@ -216,4 +216,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+createRoot(document.getElementById('app')).render(<App />);

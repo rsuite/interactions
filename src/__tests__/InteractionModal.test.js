@@ -78,34 +78,34 @@ it('accepts custom props on ok button via okButtonProps prop', () => {
 it('hides dialog on clicking ok button', async () => {
   const { getByRole } = render(<InteractionModal></InteractionModal>);
 
-  userEvent.click(getByRole('button', { name: '确定' }));
+  await userEvent.click(getByRole('button', { name: '确定' }));
   await waitForElementToBeRemoved(getByRole('alertdialog'));
 });
 
 it('hides dialog on clicking cancel button', async () => {
   const { getByRole } = render(<InteractionModal></InteractionModal>);
 
-  userEvent.click(getByRole('button', { name: '取消' }));
+  await userEvent.click(getByRole('button', { name: '取消' }));
   await waitForElementToBeRemoved(getByRole('alertdialog'));
 });
 
-it('calls onOk on clicking ok button', () => {
+it('calls onOk on clicking ok button', async () => {
   const onOk = jest.fn();
   const { getByRole } = render(
     <InteractionModal onOk={onOk}></InteractionModal>
   );
 
-  userEvent.click(getByRole('button', { name: '确定' }));
+  await userEvent.click(getByRole('button', { name: '确定' }));
   expect(onOk).toHaveBeenCalled();
 });
 
-it('calls onCancel on clicking cancel button', () => {
+it('calls onCancel on clicking cancel button', async () => {
   const onCancel = jest.fn();
   const { getByRole } = render(
     <InteractionModal onCancel={onCancel}></InteractionModal>
   );
 
-  userEvent.click(getByRole('button', { name: '取消' }));
+  await userEvent.click(getByRole('button', { name: '取消' }));
   expect(onCancel).toHaveBeenCalled();
 });
 
@@ -156,26 +156,40 @@ describe('waits for async onOk', () => {
   });
 
   it('shows loading state on ok button', async () => {
-    const asyncOnOk = jest.fn(() => (promise = Promise.resolve()));
+    const asyncOnOk = jest.fn(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    });
 
     const { getByRole } = render(
       <InteractionModal onOk={asyncOnOk}></InteractionModal>
     );
 
     const okButton = getByRole('button', { name: '确定' });
-    userEvent.click(okButton);
+    await userEvent.click(okButton);
+
     expect(okButton).toHaveClass('rs-btn-loading');
 
     await act(() => promise);
   });
 
   it('disables cancel button when ok is loading', async () => {
-    const asyncOnOk = jest.fn(() => (promise = Promise.resolve()));
+    const asyncOnOk = jest.fn(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 1000);
+      });
+    });
+
     const { getByRole } = render(
       <InteractionModal onOk={asyncOnOk}></InteractionModal>
     );
 
-    userEvent.click(getByRole('button', { name: '确定' }));
+    await userEvent.click(getByRole('button', { name: '确定' }));
     expect(getByRole('button', { name: '取消' })).toBeDisabled();
     await act(() => promise);
   });
@@ -186,7 +200,7 @@ describe('waits for async onOk', () => {
       <InteractionModal onOk={asyncOnOk} canCancelOnLoading></InteractionModal>
     );
 
-    userEvent.click(getByRole('button', { name: '确定' }));
+    await userEvent.click(getByRole('button', { name: '确定' }));
     expect(getByRole('button', { name: '取消' })).not.toBeDisabled();
     await act(() => promise);
   });

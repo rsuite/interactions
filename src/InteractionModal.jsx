@@ -10,7 +10,7 @@ function InteractionModal({
   onCancel,
   children,
   canCancelOnLoading = false,
-  modalProps: extraModalProps = {},
+  modalProps = {},
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -71,23 +71,12 @@ function InteractionModal({
     }
   }, [shouldShowModal, handleOk, handleCancel, showCancelButton]);
 
-  /**
-   * using open/show judge by rsuite version
-   * @example @4 no 'open' in propTypes
-   * @example @5 'open' in propTypes
-   */
-  const modalProps = {
-    [Modal.propTypes && 'open' in Modal.propTypes
-      ? 'open'
-      : 'show']: shouldShowModal,
-    ...extraModalProps,
-  };
-
   return (
     <Modal
       role="alertdialog"
       size="xs"
       aria-describedby="alertdialog-description"
+      open={shouldShowModal}
       {...modalProps}
     >
       <Modal.Body id="alertdialog-description">{children}</Modal.Body>
