@@ -1,15 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import InteractionModal from './InteractionModal';
-import getContainerDOM from './getContainerDOM';
 import { isFunction } from './utils';
+import getRoot from './getRoot';
 
 export default function confirm(
   message,
   { okButtonDangerous = false, ...modalConfig } = {}
 ) {
   return new Promise((resolve, reject) => {
-    ReactDOM.render(
+    getRoot().render(
       <InteractionModal
         key={Date.now()}
         canCancelOnLoading={!!modalConfig?.onCancel}
@@ -43,8 +42,7 @@ export default function confirm(
         }}
       >
         {message}
-      </InteractionModal>,
-      getContainerDOM()
+      </InteractionModal>
     );
   });
 }

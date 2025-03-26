@@ -15,7 +15,10 @@ afterEach(() => {
 it('shows dialog with given message and an ok button', () => {
   const message = 'Message';
 
-  alert(message);
+  act(() => {
+    alert(message);
+  });
+
   const dialog = screen.getByRole('alertdialog');
   expect(dialog).toBeVisible();
   expect(dialog).toHaveTextContent(message);
@@ -26,17 +29,22 @@ it('shows dialog with given message and an ok button', () => {
 });
 
 it('closes on clicking ok button', async () => {
-  alert('Message');
+  act(() => {
+    alert('Message');
+  });
 
-  userEvent.click(screen.getByRole('button', { name: '确定' }));
+  await userEvent.click(screen.getByRole('button', { name: '确定' }));
 
   await waitForElementToBeRemoved(screen.getByRole('alertdialog'));
 });
 
 it('renders custom ok button text', () => {
   const okButtonText = 'Okay';
-  alert('Message', {
-    okButtonText,
+
+  act(() => {
+    alert('Message', {
+      okButtonText,
+    });
   });
 
   expect(
@@ -47,11 +55,14 @@ it('renders custom ok button text', () => {
 describe('triggers callbacks', () => {
   it('calls onOk on clicking ok button', async () => {
     const onOk = jest.fn();
-    alert('Message', {
-      onOk,
+
+    act(() => {
+      alert('Message', {
+        onOk,
+      });
     });
 
-    userEvent.click(screen.getByRole('button', { name: '确定' }));
+    await userEvent.click(screen.getByRole('button', { name: '确定' }));
     expect(onOk).toHaveBeenCalled();
   });
 
@@ -64,43 +75,42 @@ describe('triggers callbacks', () => {
           }, 1000);
         })
     );
-    const promise = alert('Message', {
-      async onOk() {
-        await asyncOnOk();
-      },
+
+    act(() => {
+      alert('Message', {
+        async onOk() {
+          await asyncOnOk();
+        },
+      });
     });
 
-    const okButton = screen.getByRole('button', { name: '确定' });
-    userEvent.click(okButton);
+    await userEvent.click(screen.getByRole('button', { name: '确定' }));
 
     expect(asyncOnOk).toHaveBeenCalled();
-
-    await act(() => promise);
   });
 
   describe('waits for async onOk', () => {
     let promise;
     beforeEach(async () => {
       jest.useFakeTimers();
+      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+
       const asyncOnOk = jest.fn(
         () =>
           (promise = new Promise((resolve) => {
             setTimeout(() => {
               resolve();
-            }, 1000);
+            }, 10000);
           }))
       );
 
-      alert('Message', {
-        onOk: asyncOnOk,
+      act(() => {
+        alert('Message', {
+          onOk: asyncOnOk,
+        });
       });
-      userEvent.click(screen.getByRole('button', { name: '确定' }));
-    });
 
-    afterEach(async () => {
-      jest.advanceTimersByTime(1000);
-      jest.useRealTimers();
-      await act(() => promise);
+      await user.click(screen.getByRole('button', { name: '确定' }));
     });
 
     it('shows loading on ok button', () => {
@@ -110,7 +120,11 @@ describe('triggers callbacks', () => {
     });
 
     it('closes after Promise finishes', async () => {
-      jest.advanceTimersByTime(1000);
+      act(() => {
+        jest.advanceTimersByTime(10000);
+      });
+      jest.useRealTimers();
+
       await waitForElementToBeRemoved(screen.getByRole('alertdialog'));
     });
   });
