@@ -8,7 +8,7 @@ import packageJson from './package.json';
  */
 const config = {
   input: 'src/index.js',
-  external: Object.keys(packageJson.peerDependencies),
+  external: [/node_modules/],
   output: [
     {
       file: packageJson.main,
@@ -16,7 +16,7 @@ const config = {
     },
     {
       file: packageJson.module,
-      format: 'es',
+      format: 'esm',
     },
   ],
   plugins: [
