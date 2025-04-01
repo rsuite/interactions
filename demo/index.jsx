@@ -47,6 +47,7 @@ function App() {
         okButtonText: 'Yes',
         okButtonDangerous: true,
         cancelButtonText: 'No',
+        title: 'Warning',
       })
     ) {
       alert('Rest in pieces.');

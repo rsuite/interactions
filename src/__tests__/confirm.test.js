@@ -29,6 +29,21 @@ it('shows dialog with given message and two buttons', async () => {
   ).toBeInTheDocument();
 });
 
+it('show dialog with custom title', async () => {
+  const title = 'Custom Title';
+  confirm('Message', {
+    title,
+  });
+
+  expect(screen.getByRole('alertdialog')).toHaveTextContent(title);
+  expect(screen.queryByLabelText('Close')).toBeInTheDocument();
+});
+it('show dialog without custom title', async () => {
+  confirm('Message');
+
+  expect(screen.queryByLabelText('Close')).not.toBeInTheDocument();
+});
+
 it('renders custom button text', async () => {
   const okButtonText = 'Okay';
   const cancelButtonText = 'Nah';

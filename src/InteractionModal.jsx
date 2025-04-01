@@ -11,6 +11,7 @@ function InteractionModal({
   children,
   canCancelOnLoading = false,
   modalProps: extraModalProps = {},
+  title,
 }) {
   const [shouldShowModal, setShouldShowModal] = useState(true);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -90,6 +91,11 @@ function InteractionModal({
       aria-describedby="alertdialog-description"
       {...modalProps}
     >
+      {title && (
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+      )}
       <Modal.Body id="alertdialog-description">{children}</Modal.Body>
       <Modal.Footer>
         {showCancelButton && (

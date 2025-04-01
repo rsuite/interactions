@@ -17,6 +17,7 @@ interface ConfirmModalProps extends WrappedModalProps {
   onOk?: (() => void) | (() => Promise<any>);
   onCancel?: (isSubmitLoading?: boolean) => any;
   canCancelOnLoading?: boolean;
+  title?: React.ReactNode;
 }
 
 interface PromptModalProps extends WrappedModalProps {
