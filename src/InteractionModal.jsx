@@ -89,6 +89,7 @@ function InteractionModal({
       role="alertdialog"
       size="xs"
       aria-describedby="alertdialog-description"
+      onClose={handleCancel}
       {...modalProps}
     >
       {title && (
